@@ -5,7 +5,11 @@
 package frames;
 
 
+import data.EventMenuSelected;
+import forms.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.JComponent;
 
 /**
  *
@@ -14,13 +18,59 @@ import java.awt.Color;
 public class MainMenu extends javax.swing.JFrame {
 
     
+    private jpMainMenu MainM;
+    private jpAlumnos alumnos;
+    private jpCalificaciones calif;
+    private jpPromedio promed;
+    private jpMejoresAlumnos mejorAlum;
+    
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
         initComponents();
         
+        setBackground(new Color(0, 0, 0, 0));
+        MainM = new jpMainMenu();
+        alumnos = new jpAlumnos(this);
+        calif = new jpCalificaciones();
+        promed = new jpPromedio();
+        mejorAlum = new jpMejoresAlumnos();
         
+        jpMenu1.addEventMenuSelected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                if (index == 2) {
+                    setForm(MainM);
+                } else if (index == 3) {
+                    setForm(alumnos);
+                } else if (index == 4) {
+                    setForm(calif);
+                } else if (index == 5){
+                    setForm(promed);
+                } else if (index == 6){
+                    setForm(mejorAlum);
+                }
+              
+            }
+        });
+        //  set when system open start with home creo que no ai loviu ailoveyou2
+        setForm(new jpMainMenu());
+        
+    }
+    
+    private void setForm(JComponent com) {
+        jpContentMain contentMain = new jpContentMain();
+        contentMain.removeAll();
+        contentMain.add(jpBarHeader, BorderLayout.NORTH);
+        contentMain.add(com, BorderLayout.CENTER);
+        contentMain.revalidate();
+        contentMain.repaint();
+        
+        jpContent.removeAll();
+        jpContent.add(contentMain, BorderLayout.CENTER);
+        jpContent.revalidate();
+        jpContent.repaint();
     }
     
     private int x;
@@ -37,7 +87,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jpBg = new javax.swing.JPanel();
         jpLeftMenu = new javax.swing.JPanel();
-        jpMenu2 = new components.jpMenu();
+        jpMenu1 = new components.jpMenu();
         jpContent = new javax.swing.JPanel();
         jpBarHeader = new javax.swing.JPanel();
         jpBarClose = new javax.swing.JPanel();
@@ -60,7 +110,7 @@ public class MainMenu extends javax.swing.JFrame {
         jpLeftMenu.setMinimumSize(new java.awt.Dimension(200, 100));
         jpLeftMenu.setPreferredSize(new java.awt.Dimension(210, 484));
         jpLeftMenu.setLayout(new java.awt.BorderLayout());
-        jpLeftMenu.add(jpMenu2, java.awt.BorderLayout.CENTER);
+        jpLeftMenu.add(jpMenu1, java.awt.BorderLayout.CENTER);
 
         jpBg.add(jpLeftMenu, java.awt.BorderLayout.LINE_START);
 
@@ -277,7 +327,7 @@ public class MainMenu extends javax.swing.JFrame {
     public javax.swing.JPanel jpContent;
     private javax.swing.JPanel jpLeftMenu;
     private javax.swing.JPanel jpMax;
-    private components.jpMenu jpMenu2;
+    private components.jpMenu jpMenu1;
     private javax.swing.JPanel jpMin;
     // End of variables declaration//GEN-END:variables
 }
