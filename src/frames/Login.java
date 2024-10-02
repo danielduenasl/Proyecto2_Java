@@ -64,7 +64,6 @@ public class Login extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(740, 540));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(740, 540));
         setResizable(false);
 
         jpBG.setBackground(new java.awt.Color(255, 255, 255));
@@ -148,7 +147,6 @@ public class Login extends javax.swing.JFrame {
         jpContain.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LOGIN");
 
@@ -179,26 +177,22 @@ public class Login extends javax.swing.JFrame {
         jpBtn.add(jlogin, java.awt.BorderLayout.CENTER);
 
         jlPass.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jlPass.setForeground(new java.awt.Color(0, 0, 0));
         jlPass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlPass.setText("PASSWORD");
 
         jlUser.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jlUser.setForeground(new java.awt.Color(0, 0, 0));
         jlUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlUser.setText("USER");
 
         jlBDD.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jlBDD.setForeground(new java.awt.Color(0, 0, 0));
         jlBDD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlBDD.setText("DATA BASE");
 
         jlServer1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        jlServer1.setForeground(new java.awt.Color(0, 0, 0));
         jlServer1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlServer1.setText("SERVER");
 
-        txtUser.setToolTipText("");
+        txtUser.setToolTipText("Ingrese su usuario");
         txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUserKeyPressed(evt);
