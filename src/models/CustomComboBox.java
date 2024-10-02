@@ -24,7 +24,7 @@ public class CustomComboBox extends JComboBox<Object> {
         
         setBackground(Color.LIGHT_GRAY);
         setForeground(Color.DARK_GRAY);
-        setFont(new Font("Arial", Font.PLAIN, 14));
+        setFont(new Font("Segoe UI", Font.BOLD, 14));
         
         setUI(new CustomComboBoxUI());
     }
@@ -34,7 +34,7 @@ public class CustomComboBox extends JComboBox<Object> {
         @Override
         protected JButton createArrowButton() {
             JButton arrowButton = super.createArrowButton();
-            arrowButton.setBackground(Color.GRAY);
+            arrowButton.setBackground(new Color(222, 8, 163));
             return arrowButton;
         }
 
@@ -43,7 +43,7 @@ public class CustomComboBox extends JComboBox<Object> {
             super.installUI(c);
             JComboBox comboBox = (JComboBox) c;
             comboBox.setOpaque(true);
-            comboBox.setBackground(Color.LIGHT_GRAY);
+            comboBox.setBackground(new Color(222, 8, 163));
             comboBox.setForeground(Color.DARK_GRAY);
         }
 
@@ -55,11 +55,11 @@ public class CustomComboBox extends JComboBox<Object> {
                     JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                     label.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
                     if (isSelected) {
-                        label.setBackground(new Color(64, 64, 64));
+                        label.setBackground(new Color(222, 8, 163));
                         label.setForeground(Color.WHITE);
                     } else {
-                        label.setBackground(Color.LIGHT_GRAY);
-                        label.setForeground(Color.DARK_GRAY);
+                        label.setBackground(new Color(232, 50, 22));
+                        label.setForeground(Color.WHITE);
                     }
                     return label;
                 }

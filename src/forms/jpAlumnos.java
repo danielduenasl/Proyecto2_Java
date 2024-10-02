@@ -23,11 +23,11 @@ public class jpAlumnos extends javax.swing.JPanel {
     public jpAlumnos(MainMenu mainM) {
         initComponents();
         
-        jTable1.getTableHeader().setFont (new Font ("Segoe UI", Font.BOLD, 12));
-        jTable1.getTableHeader().setOpaque (false);
-        jTable1.getTableHeader().setBackground(Color.CYAN);
-        jTable1.getTableHeader().setForeground(new Color (255,255, 255));
-        jTable1.getRowHeight(25);
+//        jTable1.getTableHeader().setFont (new Font ("Segoe UI", Font.BOLD, 12));
+//        jTable1.getTableHeader().setOpaque (false);
+//        jTable1.getTableHeader().setBackground(Color.CYAN);
+//        jTable1.getTableHeader().setForeground(new Color (255,255, 255));
+//        jTable1.getRowHeight(25);
   
     }
     
@@ -43,14 +43,18 @@ public class jpAlumnos extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jpBtnInfo = new javax.swing.JPanel();
         jlBtnInfo = new javax.swing.JLabel();
         jpBtnNotas = new javax.swing.JPanel();
-        jlBtnInfo1 = new javax.swing.JLabel();
+        jlBtnInfo2 = new javax.swing.JLabel();
+        customComboBox1 = new models.CustomComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        customTable1 = new models.CustomTable();
+        jLabel3 = new javax.swing.JLabel();
+        customTextField1 = new models.CustomTextField();
+        jpBtnCreate = new javax.swing.JPanel();
+        jlBtnCreate = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(760, 606));
         setLayout(new java.awt.BorderLayout());
@@ -58,73 +62,19 @@ public class jpAlumnos extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("ALUMNOS");
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                " Clave", "         Nombre", "         Apellido", "            Carnet"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
+        jLabel2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("PROFESOR");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setFocusable(false);
-        jTable1.setName(""); // NOI18N
-        jTable1.setOpaque(false);
-        jTable1.setRowHeight(24);
-        jTable1.setSelectionBackground(new java.awt.Color(255, 102, 0));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTable1.setShowGrid(false);
-        jTable1.setShowHorizontalLines(true);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-        }
-
-        jComboBox1.setBackground(new java.awt.Color(255, 153, 0));
-        jComboBox1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
-        jComboBox1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel2.setText("GRADO");
-
-        jpBtnInfo.setBackground(new java.awt.Color(247, 220, 5));
+        jpBtnInfo.setBackground(new java.awt.Color(222, 8, 163));
+        jpBtnInfo.setForeground(new java.awt.Color(255, 255, 255));
         jpBtnInfo.setLayout(new java.awt.BorderLayout());
 
         jlBtnInfo.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jlBtnInfo.setForeground(new java.awt.Color(51, 51, 0));
+        jlBtnInfo.setForeground(new java.awt.Color(255, 255, 255));
         jlBtnInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlBtnInfo.setText("CONSULTAR INFORMACIÓN");
         jlBtnInfo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,113 +90,172 @@ public class jpAlumnos extends javax.swing.JPanel {
         });
         jpBtnInfo.add(jlBtnInfo, java.awt.BorderLayout.CENTER);
 
-        jpBtnNotas.setBackground(new java.awt.Color(247, 220, 5));
+        jpBtnNotas.setBackground(new java.awt.Color(222, 8, 163));
         jpBtnNotas.setLayout(new java.awt.BorderLayout());
 
-        jlBtnInfo1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jlBtnInfo1.setForeground(new java.awt.Color(51, 51, 0));
-        jlBtnInfo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlBtnInfo1.setText("CONSULTAR NOTAS");
-        jlBtnInfo1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlBtnInfo2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jlBtnInfo2.setForeground(new java.awt.Color(255, 255, 255));
+        jlBtnInfo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlBtnInfo2.setText("CONSULTAR NOTAS");
+        jlBtnInfo2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBtnInfo1MouseClicked(evt);
+                jlBtnInfo2MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlBtnInfo1MouseEntered(evt);
+                jlBtnInfo2MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlBtnInfo1MouseExited(evt);
+                jlBtnInfo2MouseExited(evt);
             }
         });
-        jpBtnNotas.add(jlBtnInfo1, java.awt.BorderLayout.CENTER);
+        jpBtnNotas.add(jlBtnInfo2, java.awt.BorderLayout.CENTER);
+
+        customComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
+
+        customTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "No.", "Nombre", "Apellido", "Carnet"
+            }
+        ));
+        jScrollPane2.setViewportView(customTable1);
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("GRADO");
+
+        customTextField1.setEditable(false);
+
+        jpBtnCreate.setBackground(new java.awt.Color(222, 8, 163));
+        jpBtnCreate.setLayout(new java.awt.BorderLayout());
+
+        jlBtnCreate.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jlBtnCreate.setForeground(new java.awt.Color(255, 255, 255));
+        jlBtnCreate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlBtnCreate.setText("CREAR ALUMNO");
+        jlBtnCreate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlBtnCreateMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlBtnCreateMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlBtnCreateMouseExited(evt);
+            }
+        });
+        jpBtnCreate.add(jlBtnCreate, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(356, Short.MAX_VALUE)
-                        .addComponent(jpBtnNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(13, 13, 13))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(153, 153, 153)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(41, 41, 41))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                            .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(367, 367, 367)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jpBtnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addGap(216, 216, 216)
+                        .addComponent(jpBtnNotas, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jpBtnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(21, 21, 21))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(customComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(customTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpBtnNotas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpBtnInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpBtnNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpBtnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jlBtnInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseEntered
-        jpBtnInfo.setBackground(new Color (236, 179, 6));
+        jpBtnInfo.setBackground(new Color (232, 50, 22));
     }//GEN-LAST:event_jlBtnInfoMouseEntered
 
     private void jlBtnInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseExited
-        jpBtnInfo.setBackground(new Color (247, 220, 5));
+        jpBtnInfo.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnInfoMouseExited
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
 
     }//GEN-LAST:event_jlBtnInfoMouseClicked
 
-    private void jlBtnInfo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo1MouseClicked
+    private void jlBtnCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnCreateMouseClicked
 
-    }//GEN-LAST:event_jlBtnInfo1MouseClicked
+    }//GEN-LAST:event_jlBtnCreateMouseClicked
 
-    private void jlBtnInfo1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo1MouseEntered
-        jpBtnNotas.setBackground(new Color (236, 179, 6));
-    }//GEN-LAST:event_jlBtnInfo1MouseEntered
+    private void jlBtnCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnCreateMouseEntered
+        jpBtnCreate.setBackground(new Color (232, 50, 22));
+    }//GEN-LAST:event_jlBtnCreateMouseEntered
 
-    private void jlBtnInfo1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo1MouseExited
-        jpBtnNotas.setBackground(new Color (247, 220, 5));
-    }//GEN-LAST:event_jlBtnInfo1MouseExited
+    private void jlBtnCreateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnCreateMouseExited
+        jpBtnCreate.setBackground(new Color (222, 8, 163));
+    }//GEN-LAST:event_jlBtnCreateMouseExited
+
+    private void jlBtnInfo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jlBtnInfo2MouseClicked
+
+    private void jlBtnInfo2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo2MouseEntered
+        jpBtnNotas.setBackground(new Color (232, 50, 22));
+    }//GEN-LAST:event_jlBtnInfo2MouseEntered
+
+    private void jlBtnInfo2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo2MouseExited
+        jpBtnNotas.setBackground(new Color (222, 8, 163));
+    }//GEN-LAST:event_jlBtnInfo2MouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private models.CustomComboBox customComboBox1;
+    private models.CustomTable customTable1;
+    private models.CustomTextField customTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jlBtnCreate;
     private javax.swing.JLabel jlBtnInfo;
-    private javax.swing.JLabel jlBtnInfo1;
+    private javax.swing.JLabel jlBtnInfo2;
+    private javax.swing.JPanel jpBtnCreate;
     private javax.swing.JPanel jpBtnInfo;
     private javax.swing.JPanel jpBtnNotas;
     // End of variables declaration//GEN-END:variables

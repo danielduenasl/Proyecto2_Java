@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import static javax.swing.SwingConstants.CENTER;
 
 public class CustomTable extends JTable {
 
@@ -30,6 +31,7 @@ public class CustomTable extends JTable {
         setBackground(Color.LIGHT_GRAY);
         setForeground(Color.DARK_GRAY);
         setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        setSelectionBackground(new Color(232, 50, 22));
         setRowHeight(25);
 
         JTableHeader header = getTableHeader();
@@ -50,9 +52,9 @@ public class CustomTable extends JTable {
 
         public CustomHeaderRenderer() {
             setOpaque(true);
-            setBackground(new Color(255,51,153)); 
+            setBackground(new Color(222, 8, 163)); 
             setForeground(Color.WHITE); 
-            setFont(new Font("Segoe UI", Font.BOLD, 12));
+            setFont(new Font("Segoe UI", Font.BOLD, 14));
             setHorizontalAlignment(CENTER);
         }
 
