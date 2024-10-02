@@ -4,6 +4,8 @@
  */
 package forms;
 
+import java.time.LocalTime;
+
 /**
  *
  * @author PC
@@ -15,6 +17,18 @@ public class jpMainMenu extends javax.swing.JPanel {
      */
     public jpMainMenu() {
         initComponents();
+        
+
+        LocalTime now = LocalTime.now();
+        String saludo;
+        if (now.isBefore(LocalTime.of(12, 0))) {
+            saludo = "BUENOS DIAS!";
+        } else if (now.isBefore(LocalTime.of(18, 0))) {
+            saludo = "BUENAS TARDES!";
+        } else {
+            saludo = "BUENAS NOCHES!";
+        }
+        jlWelcome.setText(saludo);
     }
 
     /**
@@ -27,34 +41,52 @@ public class jpMainMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jpMarca = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jpContent = new javax.swing.JPanel();
+        jlWelcome = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(760, 606));
         setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jpMarca.setBackground(new java.awt.Color(255, 255, 255));
+        jpMarca.setPreferredSize(new java.awt.Dimension(760, 32));
+        jpMarca.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setForeground(new java.awt.Color(225, 225, 225));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("WELCOME");
+        jLabel1.setText("Dalila & Daniel");
+        jpMarca.add(jLabel1, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(448, Short.MAX_VALUE))
+        jPanel1.add(jpMarca, java.awt.BorderLayout.PAGE_END);
+
+        jpContent.setBackground(new java.awt.Color(255, 255, 255));
+
+        jlWelcome.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jlWelcome.setForeground(new java.awt.Color(0, 0, 0));
+        jlWelcome.setText("WELCOME");
+
+        javax.swing.GroupLayout jpContentLayout = new javax.swing.GroupLayout(jpContent);
+        jpContent.setLayout(jpContentLayout);
+        jpContentLayout.setHorizontalGroup(
+            jpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpContentLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jlWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(186, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(461, Short.MAX_VALUE))
+        jpContentLayout.setVerticalGroup(
+            jpContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpContentLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jlWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(437, Short.MAX_VALUE))
         );
+
+        jPanel1.add(jpContent, java.awt.BorderLayout.CENTER);
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -63,5 +95,8 @@ public class jpMainMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jlWelcome;
+    private javax.swing.JPanel jpContent;
+    private javax.swing.JPanel jpMarca;
     // End of variables declaration//GEN-END:variables
 }

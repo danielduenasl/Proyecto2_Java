@@ -54,9 +54,24 @@ public class MainMenu extends javax.swing.JFrame {
               
             }
         });
-        //  set when system open start with home creo que no ai loviu ailoveyou2
+        
+        jpMenu1.addEventMenu2Selected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                if (index == 0) {
+                    Logout();
+                }
+            }
+        });
+        //  set when system open start with home
         setForm(new jpMainMenu());
         
+    }
+    
+    private void Logout(){
+        Login log = new Login();
+        log.show();
+        this.setVisible(false);
     }
     
     private void setForm(JComponent com) {
@@ -110,6 +125,17 @@ public class MainMenu extends javax.swing.JFrame {
         jpLeftMenu.setMinimumSize(new java.awt.Dimension(200, 100));
         jpLeftMenu.setPreferredSize(new java.awt.Dimension(210, 484));
         jpLeftMenu.setLayout(new java.awt.BorderLayout());
+
+        jpMenu1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jpMenu1MouseDragged(evt);
+            }
+        });
+        jpMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jpMenu1MousePressed(evt);
+            }
+        });
         jpLeftMenu.add(jpMenu1, java.awt.BorderLayout.CENTER);
 
         jpBg.add(jpLeftMenu, java.awt.BorderLayout.LINE_START);
@@ -279,6 +305,15 @@ public class MainMenu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jpBarHeaderMouseClicked
+
+    private void jpMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpMenu1MousePressed
+        getX = evt.getX();
+        getY = evt.getY();
+    }//GEN-LAST:event_jpMenu1MousePressed
+
+    private void jpMenu1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpMenu1MouseDragged
+        this.setLocation(evt.getXOnScreen() - getX, evt.getYOnScreen() - getY);
+    }//GEN-LAST:event_jpMenu1MouseDragged
 
     /**
      * @param args the command line arguments
