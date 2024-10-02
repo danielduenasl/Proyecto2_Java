@@ -4,6 +4,8 @@
  */
 package forms;
 
+import frames.MainMenu;
+import java.awt.BorderLayout;
 import java.awt.Color;
 
 /**
@@ -12,12 +14,14 @@ import java.awt.Color;
  */
 public class jpCalificaciones extends javax.swing.JPanel {
 
+    private MainMenu mainMenu; 
     /**
      * Creates new form jpCalificaciones
      */
-    public jpCalificaciones() {
+    public jpCalificaciones(MainMenu mainM) {
         initComponents();
         
+        mainMenu = mainM;
     }
 
     /**
@@ -137,9 +141,9 @@ public class jpCalificaciones extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jpBtnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
 
@@ -147,7 +151,22 @@ public class jpCalificaciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
+        jpModificarNotas modificarNotas = new jpModificarNotas();
+        modificarNotas.setSize(760, 606);
+        modificarNotas.setLocation(0, 0);
 
+        jpContentMain contentMain = new jpContentMain();
+        contentMain.removeAll();
+        contentMain.add(mainMenu.jpBarHeader, BorderLayout.NORTH);
+        contentMain.add(modificarNotas, BorderLayout.CENTER);
+        contentMain.revalidate();
+        contentMain.repaint();
+        
+        mainMenu.jpContent.removeAll();
+        mainMenu.jpContent.add(contentMain, BorderLayout.CENTER);
+        mainMenu.jpContent.revalidate();
+        mainMenu.jpContent.repaint();
+        jpBtnInfo.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnInfoMouseClicked
 
     private void jlBtnInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseEntered

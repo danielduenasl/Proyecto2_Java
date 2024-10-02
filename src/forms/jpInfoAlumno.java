@@ -4,6 +4,9 @@
  */
 package forms;
 
+import data.Student;
+import frames.MainMenu;
+
 /**
  *
  * @author PC
@@ -13,7 +16,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
     /**
      * Creates new form jpInfoAlumno
      */
-    public jpInfoAlumno() {
+    public jpInfoAlumno(MainMenu mainMenu, Student student) {
         initComponents();
     }
 

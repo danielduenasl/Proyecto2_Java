@@ -87,9 +87,9 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="317" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" pref="317" max="32767" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="jpBtnInfo" pref="45" max="32767" attributes="0"/>
+                  <Component id="jpBtnInfo" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
           </Group>

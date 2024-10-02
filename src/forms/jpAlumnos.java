@@ -5,7 +5,9 @@
 package forms;
 
 
+import data.Student;
 import frames.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 
@@ -23,11 +25,7 @@ public class jpAlumnos extends javax.swing.JPanel {
     public jpAlumnos(MainMenu mainM) {
         initComponents();
         
-//        jTable1.getTableHeader().setFont (new Font ("Segoe UI", Font.BOLD, 12));
-//        jTable1.getTableHeader().setOpaque (false);
-//        jTable1.getTableHeader().setBackground(Color.CYAN);
-//        jTable1.getTableHeader().setForeground(new Color (255,255, 255));
-//        jTable1.getRowHeight(25);
+        this.mainMenu = mainM;
   
     }
     
@@ -47,7 +45,7 @@ public class jpAlumnos extends javax.swing.JPanel {
         jpBtnInfo = new javax.swing.JPanel();
         jlBtnInfo = new javax.swing.JLabel();
         jpBtnNotas = new javax.swing.JPanel();
-        jlBtnInfo2 = new javax.swing.JLabel();
+        jlBtnNotas = new javax.swing.JLabel();
         customComboBox1 = new models.CustomComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         customTable1 = new models.CustomTable();
@@ -93,22 +91,22 @@ public class jpAlumnos extends javax.swing.JPanel {
         jpBtnNotas.setBackground(new java.awt.Color(222, 8, 163));
         jpBtnNotas.setLayout(new java.awt.BorderLayout());
 
-        jlBtnInfo2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jlBtnInfo2.setForeground(new java.awt.Color(255, 255, 255));
-        jlBtnInfo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlBtnInfo2.setText("CONSULTAR NOTAS");
-        jlBtnInfo2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlBtnNotas.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jlBtnNotas.setForeground(new java.awt.Color(255, 255, 255));
+        jlBtnNotas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlBtnNotas.setText("CONSULTAR NOTAS");
+        jlBtnNotas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBtnInfo2MouseClicked(evt);
+                jlBtnNotasMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlBtnInfo2MouseEntered(evt);
+                jlBtnNotasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlBtnInfo2MouseExited(evt);
+                jlBtnNotasMouseExited(evt);
             }
         });
-        jpBtnNotas.add(jlBtnInfo2, java.awt.BorderLayout.CENTER);
+        jpBtnNotas.add(jlBtnNotas, java.awt.BorderLayout.CENTER);
 
         customComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
 
@@ -157,28 +155,30 @@ public class jpAlumnos extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                        .addGap(431, 431, 431))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(367, 367, 367)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jpBtnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                        .addGap(216, 216, 216)
-                        .addComponent(jpBtnNotas, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jpBtnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(367, 367, 367)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jpBtnCreate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(225, 225, 225)
+                                .addComponent(jpBtnNotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jpBtnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(21, 21, 21))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,16 +194,16 @@ public class jpAlumnos extends javax.swing.JPanel {
                     .addComponent(customComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(customTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpBtnNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpBtnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15))
+                    .addComponent(jpBtnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlBtnInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseEntered
@@ -215,11 +215,43 @@ public class jpAlumnos extends javax.swing.JPanel {
     }//GEN-LAST:event_jlBtnInfoMouseExited
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
+        Student student = new Student();
+        
+        jpInfoAlumno infoAlumno = new jpInfoAlumno(mainMenu, student);
+        infoAlumno.setSize(760, 606);
+        infoAlumno.setLocation(0, 0);
 
+        jpContentMain contentMain = new jpContentMain();
+        contentMain.removeAll();
+        contentMain.add(mainMenu.jpBarHeader, BorderLayout.NORTH);
+        contentMain.add(infoAlumno, BorderLayout.CENTER);
+        contentMain.revalidate();
+        contentMain.repaint();
+        
+        mainMenu.jpContent.removeAll();
+        mainMenu.jpContent.add(contentMain, BorderLayout.CENTER);
+        mainMenu.jpContent.revalidate();
+        mainMenu.jpContent.repaint();
+        jpBtnInfo.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnInfoMouseClicked
 
     private void jlBtnCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnCreateMouseClicked
+        jpCrearAlumno crearAlumno = new jpCrearAlumno();
+        crearAlumno.setSize(760, 606);
+        crearAlumno.setLocation(0, 0);
 
+        jpContentMain contentMain = new jpContentMain();
+        contentMain.removeAll();
+        contentMain.add(mainMenu.jpBarHeader, BorderLayout.NORTH);
+        contentMain.add(crearAlumno, BorderLayout.CENTER);
+        contentMain.revalidate();
+        contentMain.repaint();
+        
+        mainMenu.jpContent.removeAll();
+        mainMenu.jpContent.add(contentMain, BorderLayout.CENTER);
+        mainMenu.jpContent.revalidate();
+        mainMenu.jpContent.repaint();
+        jpBtnCreate.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnCreateMouseClicked
 
     private void jlBtnCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnCreateMouseEntered
@@ -230,17 +262,32 @@ public class jpAlumnos extends javax.swing.JPanel {
         jpBtnCreate.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnCreateMouseExited
 
-    private void jlBtnInfo2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlBtnInfo2MouseClicked
+    private void jlBtnNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnNotasMouseClicked
+        jpNotasAlumno notasAlumno = new jpNotasAlumno();
+        notasAlumno.setSize(760, 606);
+        notasAlumno.setLocation(0, 0);
 
-    private void jlBtnInfo2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo2MouseEntered
-        jpBtnNotas.setBackground(new Color (232, 50, 22));
-    }//GEN-LAST:event_jlBtnInfo2MouseEntered
-
-    private void jlBtnInfo2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfo2MouseExited
+        jpContentMain contentMain = new jpContentMain();
+        contentMain.removeAll();
+        contentMain.add(mainMenu.jpBarHeader, BorderLayout.NORTH);
+        contentMain.add(notasAlumno, BorderLayout.CENTER);
+        contentMain.revalidate();
+        contentMain.repaint();
+        
+        mainMenu.jpContent.removeAll();
+        mainMenu.jpContent.add(contentMain, BorderLayout.CENTER);
+        mainMenu.jpContent.revalidate();
+        mainMenu.jpContent.repaint();
         jpBtnNotas.setBackground(new Color (222, 8, 163));
-    }//GEN-LAST:event_jlBtnInfo2MouseExited
+    }//GEN-LAST:event_jlBtnNotasMouseClicked
+
+    private void jlBtnNotasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnNotasMouseEntered
+        jpBtnNotas.setBackground(new Color (232, 50, 22));
+    }//GEN-LAST:event_jlBtnNotasMouseEntered
+
+    private void jlBtnNotasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnNotasMouseExited
+        jpBtnNotas.setBackground(new Color (222, 8, 163));
+    }//GEN-LAST:event_jlBtnNotasMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -254,7 +301,7 @@ public class jpAlumnos extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jlBtnCreate;
     private javax.swing.JLabel jlBtnInfo;
-    private javax.swing.JLabel jlBtnInfo2;
+    private javax.swing.JLabel jlBtnNotas;
     private javax.swing.JPanel jpBtnCreate;
     private javax.swing.JPanel jpBtnInfo;
     private javax.swing.JPanel jpBtnNotas;
