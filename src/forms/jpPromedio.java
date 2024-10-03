@@ -442,7 +442,7 @@ public class jpPromedio extends javax.swing.JPanel {
     private void Aprueba(){
         ImageIcon No = new ImageIcon(getClass().getResource("/images/NoAprob.png"));
         ImageIcon SI = new ImageIcon(getClass().getResource("/images/SiAprob.png"));
-        if (Float.parseFloat(txtPromedio.getText()) > 60){
+        if (Float.parseFloat(txtPromedio.getText()) >= 60){
             jlAprueba.setIcon(SI);
             jlAprueba.setHorizontalAlignment(CENTER);
             jlAprueba.setVerticalAlignment(CENTER);
