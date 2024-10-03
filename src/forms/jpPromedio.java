@@ -5,6 +5,7 @@
 
 package forms;
 
+import frames.DatosModif;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import static javax.swing.SwingConstants.CENTER;
@@ -142,8 +143,8 @@ public class jpPromedio extends javax.swing.JPanel {
         jlBtnSearch = new javax.swing.JLabel();
         jpAprueba = new javax.swing.JPanel();
         jlAprueba = new javax.swing.JLabel();
-        jpBtnGuardar1 = new javax.swing.JPanel();
-        jlBtnGuardar1 = new javax.swing.JLabel();
+        jpBtnDM = new javax.swing.JPanel();
+        jlBtnDM = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -265,26 +266,26 @@ public class jpPromedio extends javax.swing.JPanel {
         jpAprueba.setLayout(new java.awt.BorderLayout());
         jpAprueba.add(jlAprueba, java.awt.BorderLayout.CENTER);
 
-        jpBtnGuardar1.setBackground(new java.awt.Color(222, 8, 163));
-        jpBtnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
-        jpBtnGuardar1.setLayout(new java.awt.BorderLayout());
+        jpBtnDM.setBackground(new java.awt.Color(222, 8, 163));
+        jpBtnDM.setForeground(new java.awt.Color(255, 255, 255));
+        jpBtnDM.setLayout(new java.awt.BorderLayout());
 
-        jlBtnGuardar1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jlBtnGuardar1.setForeground(new java.awt.Color(255, 255, 255));
-        jlBtnGuardar1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlBtnGuardar1.setText("DATOS MODIFICADOS!");
-        jlBtnGuardar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jlBtnDM.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jlBtnDM.setForeground(new java.awt.Color(255, 255, 255));
+        jlBtnDM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlBtnDM.setText("DATOS MODIFICADOS!");
+        jlBtnDM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBtnGuardar1MouseClicked(evt);
+                jlBtnDMMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlBtnGuardar1MouseEntered(evt);
+                jlBtnDMMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlBtnGuardar1MouseExited(evt);
+                jlBtnDMMouseExited(evt);
             }
         });
-        jpBtnGuardar1.add(jlBtnGuardar1, java.awt.BorderLayout.CENTER);
+        jpBtnDM.add(jlBtnDM, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -305,7 +306,7 @@ public class jpPromedio extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jpBtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(253, 253, 253)
-                                .addComponent(jpBtnGuardar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jpBtnDM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jpBtnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -341,7 +342,7 @@ public class jpPromedio extends javax.swing.JPanel {
                         .addComponent(txtCarnet, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                         .addComponent(jpBtnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jpBtnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpBtnDM, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -416,17 +417,19 @@ public class jpPromedio extends javax.swing.JPanel {
         
     }//GEN-LAST:event_txtNota1ActionPerformed
 
-    private void jlBtnGuardar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnGuardar1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlBtnGuardar1MouseClicked
+    private void jlBtnDMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnDMMouseClicked
+        DatosModif DM = new DatosModif();
+        DM.show();
+        jpBtnDM.setBackground(new Color (222, 8, 163));
+    }//GEN-LAST:event_jlBtnDMMouseClicked
 
-    private void jlBtnGuardar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnGuardar1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlBtnGuardar1MouseEntered
+    private void jlBtnDMMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnDMMouseEntered
+        jpBtnDM.setBackground(new Color (232, 50, 22));
+    }//GEN-LAST:event_jlBtnDMMouseEntered
 
-    private void jlBtnGuardar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnGuardar1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jlBtnGuardar1MouseExited
+    private void jlBtnDMMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnDMMouseExited
+        jpBtnDM.setBackground(new Color (222, 8, 163));
+    }//GEN-LAST:event_jlBtnDMMouseExited
 
     private void MostarPromedio(){
         float n1 = Float.parseFloat(txtNota1.getText());
@@ -465,12 +468,12 @@ public class jpPromedio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlAprueba;
+    private javax.swing.JLabel jlBtnDM;
     private javax.swing.JLabel jlBtnGuardar;
-    private javax.swing.JLabel jlBtnGuardar1;
     private javax.swing.JLabel jlBtnSearch;
     private javax.swing.JPanel jpAprueba;
+    private javax.swing.JPanel jpBtnDM;
     private javax.swing.JPanel jpBtnGuardar;
-    private javax.swing.JPanel jpBtnGuardar1;
     private javax.swing.JPanel jpBtnSearch;
     private models.CustomTextField txtCarnet;
     private models.CustomTextField txtEstudiante;

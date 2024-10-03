@@ -47,7 +47,7 @@
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="jpBtnSearch" min="-2" pref="34" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
-                                  <Component id="jpBtnGuardar1" max="32767" attributes="0"/>
+                                  <Component id="jpBtnDM" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -94,7 +94,7 @@
                           <Component id="jLabel6" alignment="0" pref="33" max="32767" attributes="0"/>
                           <Component id="jpBtnSearch" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jpBtnGuardar1" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="jpBtnDM" min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -382,7 +382,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jpBtnGuardar1">
+        <Container class="javax.swing.JPanel" name="jpBtnDM">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="a3" green="8" red="de" type="rgb"/>
@@ -394,7 +394,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jlBtnGuardar1">
+            <Component class="javax.swing.JLabel" name="jlBtnDM">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="12" style="1"/>
@@ -406,9 +406,9 @@
                 <Property name="text" type="java.lang.String" value="DATOS MODIFICADOS!"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBtnGuardar1MouseClicked"/>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBtnGuardar1MouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBtnGuardar1MouseExited"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBtnDMMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBtnDMMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlBtnDMMouseExited"/>
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
