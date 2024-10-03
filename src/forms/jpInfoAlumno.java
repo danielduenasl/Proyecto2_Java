@@ -6,7 +6,11 @@ package forms;
 
 import data.Student;
 import frames.MainMenu;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import static javax.swing.SwingConstants.CENTER;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,13 +18,21 @@ import java.awt.Color;
  */
 public class jpInfoAlumno extends javax.swing.JPanel {
 
+    private MainMenu mainMenu;
     /**
      * Creates new form jpInfoAlumno
      */
-    public jpInfoAlumno(MainMenu mainMenu, Student student) {
+    public jpInfoAlumno(MainMenu mainM, Student student) {
         initComponents();
         
+        this.mainMenu = mainM;
         
+        Genero();
+        cbxGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxGradoActionPerformed(evt);
+            }   
+        });
     }
 
     /**
@@ -43,7 +55,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         customDateField1 = new models.CustomDateField();
         jLabel6 = new javax.swing.JLabel();
-        customComboBox1 = new models.CustomComboBox();
+        cbxGenero = new models.CustomComboBox();
         jLabel7 = new javax.swing.JLabel();
         customComboBox2 = new models.CustomComboBox();
         jPanel2 = new javax.swing.JPanel();
@@ -81,7 +93,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("GENERO");
 
-        customComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
+        cbxGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -145,7 +157,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 53, Short.MAX_VALUE))
+                        .addGap(0, 108, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jpBtnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -160,7 +172,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
                         .addGap(263, 263, 263)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(customComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(customComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -197,17 +209,31 @@ public class jpInfoAlumno extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customDateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
+        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu);
+        notasAlumno.setSize(760, 606);
+        notasAlumno.setLocation(0, 0);
 
+        jpContentMain contentMain = new jpContentMain();
+        contentMain.removeAll();
+        contentMain.add(mainMenu.jpBarHeader, BorderLayout.NORTH);
+        contentMain.add(notasAlumno, BorderLayout.CENTER);
+        contentMain.revalidate();
+        contentMain.repaint();
+        
+        mainMenu.jpContent.removeAll();
+        mainMenu.jpContent.add(contentMain, BorderLayout.CENTER);
+        mainMenu.jpContent.revalidate();
+        mainMenu.jpContent.repaint();
         jpBtnInfo.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnInfoMouseClicked
 
@@ -219,9 +245,40 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         jpBtnInfo.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnInfoMouseExited
 
+    private void jComboBoxGradoActionPerformed(java.awt.event.ActionEvent evt) {
+        String gradoSeleccionado = (String) cbxGenero.getSelectedItem();
+
+        ImageIcon man = new ImageIcon(getClass().getResource("/images/man.png"));
+        ImageIcon woman = new ImageIcon(getClass().getResource("/images/woman.png"));
+        if (gradoSeleccionado.equals("M")){
+            jlGenero.setIcon(man);
+            jlGenero.setHorizontalAlignment(CENTER);
+            jlGenero.setVerticalAlignment(CENTER);
+        } else {
+            jlGenero.setIcon(woman);
+            jlGenero.setHorizontalAlignment(CENTER);
+            jlGenero.setVerticalAlignment(CENTER);
+        }
+    }
+    
+    private void Genero(){
+        String gradoSeleccionado = (String) cbxGenero.getSelectedItem();
+
+        ImageIcon man = new ImageIcon(getClass().getResource("/images/man.png"));
+        ImageIcon woman = new ImageIcon(getClass().getResource("/images/woman.png"));
+        if (gradoSeleccionado.equals("M")){
+            jlGenero.setIcon(man);
+            jlGenero.setHorizontalAlignment(CENTER);
+            jlGenero.setVerticalAlignment(CENTER);
+        } else {
+            jlGenero.setIcon(woman);
+            jlGenero.setHorizontalAlignment(CENTER);
+            jlGenero.setVerticalAlignment(CENTER);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private models.CustomComboBox customComboBox1;
+    private models.CustomComboBox cbxGenero;
     private models.CustomComboBox customComboBox2;
     private models.CustomDateField customDateField1;
     private javax.swing.JLabel jLabel1;

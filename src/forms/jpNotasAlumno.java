@@ -4,17 +4,24 @@
  */
 package forms;
 
+import frames.MainMenu;
+import java.awt.BorderLayout;
+import java.awt.Color;
+
 /**
  *
  * @author PC
  */
 public class jpNotasAlumno extends javax.swing.JPanel {
 
+    private MainMenu mainMenu;
     /**
      * Creates new form jpNotasAlumno
      */
-    public jpNotasAlumno() {
+    public jpNotasAlumno(MainMenu mainM) {
         initComponents();
+        
+        mainMenu = mainM;
     }
 
     /**
@@ -28,6 +35,14 @@ public class jpNotasAlumno extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customTable1 = new models.CustomTable();
+        jpBtnInfo = new javax.swing.JPanel();
+        jlBtnInfo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        customTextField1 = new models.CustomTextField();
+        jLabel3 = new javax.swing.JLabel();
+        customTextField2 = new models.CustomTextField();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -37,29 +52,144 @@ public class jpNotasAlumno extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("NOTAS DEL ALUMNO");
 
+        customTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Materia", "Nota 1", "Nota 2", "Nota 3", "Nota 4", "Promedio"
+            }
+        ));
+        jScrollPane1.setViewportView(customTable1);
+
+        jpBtnInfo.setBackground(new java.awt.Color(222, 8, 163));
+        jpBtnInfo.setForeground(new java.awt.Color(255, 255, 255));
+        jpBtnInfo.setLayout(new java.awt.BorderLayout());
+
+        jlBtnInfo.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jlBtnInfo.setForeground(new java.awt.Color(255, 255, 255));
+        jlBtnInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlBtnInfo.setText("MODIFICAR NOTAS");
+        jlBtnInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlBtnInfoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jlBtnInfoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jlBtnInfoMouseExited(evt);
+            }
+        });
+        jpBtnInfo.add(jlBtnInfo, java.awt.BorderLayout.CENTER);
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("NOMBRE");
+
+        customTextField1.setEditable(false);
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("APELLIDO");
+
+        customTextField2.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(customTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap(173, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(555, 555, 555)
+                        .addComponent(jpBtnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(430, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
+        jpPromedio modificarNotas = new jpPromedio();
+        modificarNotas.setSize(760, 606);
+        modificarNotas.setLocation(0, 0);
+
+        jpContentMain contentMain = new jpContentMain();
+        contentMain.removeAll();
+        contentMain.add(mainMenu.jpBarHeader, BorderLayout.NORTH);
+        contentMain.add(modificarNotas, BorderLayout.CENTER);
+        contentMain.revalidate();
+        contentMain.repaint();
+        
+        mainMenu.jpContent.removeAll();
+        mainMenu.jpContent.add(contentMain, BorderLayout.CENTER);
+        mainMenu.jpContent.revalidate();
+        mainMenu.jpContent.repaint();
+        jpBtnInfo.setBackground(new Color (222, 8, 163));
+    }//GEN-LAST:event_jlBtnInfoMouseClicked
+
+    private void jlBtnInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseEntered
+        jpBtnInfo.setBackground(new Color (232, 50, 22));
+    }//GEN-LAST:event_jlBtnInfoMouseEntered
+
+    private void jlBtnInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseExited
+        jpBtnInfo.setBackground(new Color (222, 8, 163));
+    }//GEN-LAST:event_jlBtnInfoMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private models.CustomTable customTable1;
+    private models.CustomTextField customTextField1;
+    private models.CustomTextField customTextField2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jlBtnInfo;
+    private javax.swing.JPanel jpBtnInfo;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,8 +33,7 @@ public class jpMainMenu extends javax.swing.JPanel {
             saludo = "BUENAS NOCHES!";
         }
         jlWelcome.setText(saludo);
-        jlInfo.setText("<html>\"Brilliant Minds is a comprehensive school management application designed for elementary schools. It allows users to view student profiles, including personal information and academic details. The application enables the creation of new student records, the display of grades for all four academic terms, and provides filtering options to view data by grade and subject. Additionally, Brilliant Minds calculates students' grade averages in real-time and allows modifications to individual grades, offering a streamlined tool for both educators and school administrators.\"</html>");
-    
+
         jlGit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -97,6 +96,7 @@ public class jpMainMenu extends javax.swing.JPanel {
         jlInfo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jlInfo.setForeground(new java.awt.Color(0, 0, 0));
         jlInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlInfo.setText("<html>\"Brilliant Minds is a comprehensive school management application designed for elementary schools. It allows users to view student profiles, including personal information and academic details. The application enables the creation of new student records, the display of grades for all four academic terms, and provides filtering options to view data by grade and subject. Additionally, Brilliant Minds calculates students' grade averages in real-time and allows modifications to individual grades, offering a streamlined tool for both educators and school administrators.\"</html>");
 
         jlImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/brilliant_minds (1).jpg"))); // NOI18N
