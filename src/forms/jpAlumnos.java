@@ -334,11 +334,13 @@ public class jpAlumnos extends javax.swing.JPanel {
             
             return;
         }
+        String gradoSel = (String) cbxGrado.getSelectedItem();
        
         Student student = null;
         int row = jtableAlumno.getSelectedRow();
         String carnet = (String) jtableAlumno.getValueAt(row, 0);
         student = buscarEstudiantePorCarnet(carnet);
+        student.setGrade(gradoSel);
         
         jpInfoAlumno infoAlumno = new jpInfoAlumno(mainMenu, student);
         infoAlumno.setSize(760, 606);

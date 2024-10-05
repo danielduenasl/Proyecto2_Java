@@ -32,6 +32,27 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         txtEdad.setText(String.valueOf(student.getAge()));
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
         txtDateB.setText(formatoFecha.format(student.getDateOfBirth()));
+        if (student.getGender().equals("M"))
+        {
+            cbxGenero.setSelectedIndex(0);
+        } else { 
+            cbxGenero.setSelectedIndex(1);
+        }
+        
+        if (student.getGrade().equals("Primero"))
+        {
+            cbxGrado.setSelectedIndex(0);
+        } else if (student.getGrade().equals("Segundo")){ 
+            cbxGrado.setSelectedIndex(1);
+        } else if (student.getGrade().equals("Tercero")){ 
+            cbxGrado.setSelectedIndex(2);
+        } else if (student.getGrade().equals("Cuarto")){ 
+            cbxGrado.setSelectedIndex(3);
+        } else if (student.getGrade().equals("Quinto")){ 
+            cbxGrado.setSelectedIndex(4);
+        } else if (student.getGrade().equals("Sexto")){ 
+            cbxGrado.setSelectedIndex(5);
+        } 
         
         Genero();
         cbxGenero.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +84,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         cbxGenero = new models.CustomComboBox();
         jLabel7 = new javax.swing.JLabel();
-        customComboBox2 = new models.CustomComboBox();
+        cbxGrado = new models.CustomComboBox();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jlGenero = new javax.swing.JLabel();
@@ -106,7 +127,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("GRADO");
 
-        customComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
+        cbxGrado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 245));
 
@@ -181,7 +202,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
                             .addComponent(cbxGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(customComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+                            .addComponent(cbxGrado, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
                         .addGap(27, 27, 27))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -207,7 +228,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -285,7 +306,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private models.CustomComboBox cbxGenero;
-    private models.CustomComboBox customComboBox2;
+    private models.CustomComboBox cbxGrado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
