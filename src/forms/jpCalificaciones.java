@@ -184,13 +184,15 @@ public class jpCalificaciones extends javax.swing.JPanel {
 
     
     private void cbxGradoActionPerformed(java.awt.event.ActionEvent evt) {
-        String gradoSeleccionado = (String) cbxGrade.getSelectedItem();
-            
+         String gradoSeleccionado = (String) cbxGrade.getSelectedItem();
+    
         DefaultTableModel modelo = (DefaultTableModel) tableCalif.getModel();
- 
+        modelo.setRowCount(0); // Limpiar la tabla antes de añadir nuevas filas
+
+        int SelectGrade = 0;
         modelo.setRowCount(0);
         int i = 0;
-        int SelectGrade = 0;
+
         if (gradoSeleccionado.equals("Primero")){
             SelectGrade = 1;
         } else if (gradoSeleccionado.equals("Segundo")) {
@@ -205,19 +207,32 @@ public class jpCalificaciones extends javax.swing.JPanel {
             SelectGrade = 6;
         }
         
-        while (i < 6) {
-            if (grades.get(i).getIdGrade() == SelectGrade) {
-                 for (Student estudiante : grades.get(i).getStudents()) {
-                         Object[] fila = {
-                             estudiante.getCarnet(),
-                             estudiante.getName(),
-                         };
-                      modelo.addRow(fila);
-                 }
-             }
-            i++;
+        for (Grade grade : grades) {
+            if (grade.getIdGrade() == SelectGrade) {
+                for (Student estudiante : grade.getStudents()) {
+                    List<Courses> courses = estudiante.getCourse();
+
+                    if (courses == null || courses.isEmpty()) {
+                        System.out.println("El estudiante no tiene cursos asignados.");
+                        continue;
+                    }
+
+                    for (int a = 0; a < Math.min(courses.size(), 6); a++) {
+                        Score score = courses.get(a).getScore();
+                        Object[] fila = {
+                            estudiante.getCarnet(),
+                            estudiante.getName(),
+                            score.getScore1(),
+                            score.getScore2(),
+                            score.getScore3(),
+                            score.getScore4(),
+                        };
+                        modelo.addRow(fila);
+                    }
+                }
+                break;
+            }
         }
-        
     }
     
     private void addRows(List<Student> students) {
