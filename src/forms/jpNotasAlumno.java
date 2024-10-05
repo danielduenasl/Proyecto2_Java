@@ -4,6 +4,7 @@
  */
 package forms;
 
+import data.Conexion;
 import data.Courses;
 import data.Student;
 import frames.MainMenu;
@@ -19,13 +20,16 @@ import javax.swing.table.DefaultTableModel;
 public class jpNotasAlumno extends javax.swing.JPanel {
 
     private MainMenu mainMenu;
+    private Conexion conexion = null;
+    private Student studentS = null;
     /**
      * Creates new form jpNotasAlumno
      */
-    public jpNotasAlumno(MainMenu mainM, Student student) {
+    public jpNotasAlumno(MainMenu mainM, Student student, Conexion Con) {
         initComponents();
-        
+        conexion = Con;
         mainMenu = mainM;
+        studentS = student;
         
         txtNombre.setText(student.getName());
         txtApellido.setText(student.getLastName());
@@ -177,7 +181,18 @@ public class jpNotasAlumno extends javax.swing.JPanel {
     }
     
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
-        jpPromedio modificarNotas = new jpPromedio();
+         try{
+            int row = jtNotas.getSelectedRow();
+        }catch(Exception ex){
+            
+            return;
+        }
+       
+        Student student = studentS;
+        int row = jtNotas.getSelectedRow();
+        String materia = (String) jtNotas.getValueAt(row, 0);
+        
+        jpPromedio modificarNotas = new jpPromedio(conexion, student, materia);
         modificarNotas.setSize(760, 606);
         modificarNotas.setLocation(0, 0);
 

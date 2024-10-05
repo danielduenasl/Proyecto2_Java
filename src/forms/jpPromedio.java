@@ -5,12 +5,19 @@
 
 package forms;
 
+import data.Conexion;
+import data.Courses;
+import data.Grade;
+import data.Student;
 import frames.DatosModif;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import models.SQLMethods;
 
 /**
  *
@@ -18,9 +25,47 @@ import javax.swing.event.DocumentListener;
  */
 public class jpPromedio extends javax.swing.JPanel {
 
+    private Conexion conexion = null;
+    private Student studentS = null;
+    private String mat = null;
+    private SQLMethods SQL = null;
     /** Creates new form jpPromedio */
-    public jpPromedio() {
+    public jpPromedio(Conexion Con, Student student, String materia) {
         initComponents();
+        
+        conexion = Con;
+        studentS = student;
+        mat = materia;
+        SQL = new SQLMethods(conexion);
+        
+        if(student != null){
+            txtEstudiante.setText(student.getName() + " " + student.getLastName());
+        }
+        if(materia != ""){
+            if (materia.equals("Lenguaje"))
+            {
+                customComboBox1.setSelectedIndex(0);
+            } else if (materia.equals("Matematicas")){ 
+                customComboBox1.setSelectedIndex(1);
+            } else if (materia.equals("Sociales")){ 
+                customComboBox1.setSelectedIndex(2);
+            } else if (materia.equals("Naturales")){ 
+                customComboBox1.setSelectedIndex(3);
+            } else if (materia.equals("Artes")){ 
+                customComboBox1.setSelectedIndex(4);
+            } else if (materia.equals("Fisica")){ 
+                customComboBox1.setSelectedIndex(5);
+            } 
+        }
+        if (student != null && materia != ""){
+            Courses course = FiltrarNotas(materia, student.getCourse());
+            txtCarnet.setText(student.getCarnet());
+            txtNota1.setText(String.valueOf(course.getScore().getScore1()));
+            txtNota2.setText(String.valueOf(course.getScore().getScore2()));
+            txtNota3.setText(String.valueOf(course.getScore().getScore3()));
+            txtNota4.setText(String.valueOf(course.getScore().getScore4()));
+        }
+        
         MostarPromedio();
         Aprueba();
         
@@ -139,8 +184,6 @@ public class jpPromedio extends javax.swing.JPanel {
         txtCarnet = new models.CustomTextField();
         jpBtnGuardar = new javax.swing.JPanel();
         jlBtnGuardar = new javax.swing.JLabel();
-        jpBtnSearch = new javax.swing.JPanel();
-        jlBtnSearch = new javax.swing.JLabel();
         jpAprueba = new javax.swing.JPanel();
         jlAprueba = new javax.swing.JLabel();
 
@@ -203,6 +246,8 @@ public class jpPromedio extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("CARNET");
 
+        customComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lenguaje", "Matematicas", "Sociales", "Naturales", "Artes", "Fisica" }));
+
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("MATERIA");
@@ -231,27 +276,6 @@ public class jpPromedio extends javax.swing.JPanel {
         });
         jpBtnGuardar.add(jlBtnGuardar, java.awt.BorderLayout.CENTER);
 
-        jpBtnSearch.setBackground(new java.awt.Color(222, 8, 163));
-        jpBtnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        jpBtnSearch.setLayout(new java.awt.BorderLayout());
-
-        jlBtnSearch.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jlBtnSearch.setForeground(new java.awt.Color(255, 255, 255));
-        jlBtnSearch.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlBtnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/searchS.png"))); // NOI18N
-        jlBtnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBtnSearchMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlBtnSearchMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlBtnSearchMouseExited(evt);
-            }
-        });
-        jpBtnSearch.add(jlBtnSearch, java.awt.BorderLayout.CENTER);
-
         jpAprueba.setBackground(new java.awt.Color(222, 8, 163));
         jpAprueba.setLayout(new java.awt.BorderLayout());
         jpAprueba.add(jlAprueba, java.awt.BorderLayout.CENTER);
@@ -271,32 +295,27 @@ public class jpPromedio extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
-                                .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(jpBtnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNota1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNota3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(199, 199, 199)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jpAprueba, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jpBtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jpBtnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNota1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtEstudiante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNota3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(199, 199, 199)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jpAprueba, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                    .addComponent(txtNota2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNota4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(txtPromedio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(txtNota2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNota4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(32, 32, 32))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -307,15 +326,14 @@ public class jpPromedio extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(txtCarnet, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                    .addComponent(jpBtnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(txtEstudiante, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -333,7 +351,7 @@ public class jpPromedio extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNota4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNota3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -346,12 +364,37 @@ public class jpPromedio extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+   public Courses FiltrarNotas(String materiabusq, List<Courses> course) {
+
+        for (Courses cours : course) {
+            if (cours.getName().equals(materiabusq)) {
+                return cours;
+            }
+        }
+        return null;
+    }
+   
     private void txtNota4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNota4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNota4ActionPerformed
 
     private void jlBtnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnGuardarMouseClicked
-
+        try{
+            Courses course = FiltrarNotas(mat, studentS.getCourse());
+            int result = SQL.UpdateNotas(course.getScore());
+            if (result > 0){
+                txtCarnet.setText("");
+                txtEstudiante.setText("");
+                txtNota1.setText("0");
+                txtNota2.setText("0");
+                txtNota3.setText("0");
+                txtNota4.setText("0");
+                JOptionPane.showMessageDialog(null, "Se actualizo correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        catch (Exception ex){
+            
+        }
         jpBtnGuardar.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnGuardarMouseClicked
 
@@ -362,18 +405,6 @@ public class jpPromedio extends javax.swing.JPanel {
     private void jlBtnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnGuardarMouseExited
         jpBtnGuardar.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnGuardarMouseExited
-
-    private void jlBtnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnSearchMouseClicked
-        jpBtnSearch.setBackground(new Color (222, 8, 163));
-    }//GEN-LAST:event_jlBtnSearchMouseClicked
-
-    private void jlBtnSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnSearchMouseEntered
-        jpBtnSearch.setBackground(new Color (232, 50, 22));
-    }//GEN-LAST:event_jlBtnSearchMouseEntered
-
-    private void jlBtnSearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnSearchMouseExited
-        jpBtnSearch.setBackground(new Color (222, 8, 163));
-    }//GEN-LAST:event_jlBtnSearchMouseExited
 
     private void txtNota1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtNota1InputMethodTextChanged
 
@@ -422,10 +453,8 @@ public class jpPromedio extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlAprueba;
     private javax.swing.JLabel jlBtnGuardar;
-    private javax.swing.JLabel jlBtnSearch;
     private javax.swing.JPanel jpAprueba;
     private javax.swing.JPanel jpBtnGuardar;
-    private javax.swing.JPanel jpBtnSearch;
     private models.CustomTextField txtCarnet;
     private models.CustomTextField txtEstudiante;
     private models.CustomTextField txtNota1;

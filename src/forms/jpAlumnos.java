@@ -342,7 +342,7 @@ public class jpAlumnos extends javax.swing.JPanel {
         student = buscarEstudiantePorCarnet(carnet);
         student.setGrade(gradoSel);
         
-        jpInfoAlumno infoAlumno = new jpInfoAlumno(mainMenu, student);
+        jpInfoAlumno infoAlumno = new jpInfoAlumno(mainMenu, student, conexion);
         infoAlumno.setSize(760, 606);
         infoAlumno.setLocation(0, 0);
 
@@ -402,7 +402,7 @@ public class jpAlumnos extends javax.swing.JPanel {
         student = buscarEstudiantePorCarnet(carnet);
         student.setGrade(gradoSel);
         
-        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu, student);
+        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu, student, conexion);
         notasAlumno.setSize(760, 606);
         notasAlumno.setLocation(0, 0);
 

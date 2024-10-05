@@ -185,7 +185,7 @@ public class SQLMethods {
         List<Courses> courses = new ArrayList();
         List<course> LCourse = course;
 
-        String query = "SELECT score_1, score_2, score_3, score_4, average, id_course " +
+        String query = "SELECT id_score, score_1, score_2, score_3, score_4, average, id_course " +
                        "FROM dbschool.score WHERE id_student = ?";
 
         try (Connection conn = conexion.getConnection();
@@ -198,6 +198,7 @@ public class SQLMethods {
                 Courses newCourse = new Courses();
                 Score score = new Score();
 
+                score.setScore1(rs.getInt("id_score"));
                 score.setScore1(rs.getFloat("score_1"));
                 score.setScore2(rs.getFloat("score_2"));
                 score.setScore3(rs.getFloat("score_3"));
@@ -221,5 +222,30 @@ public class SQLMethods {
         }
 
         return courses;
+    }
+    
+    public int UpdateNotas(Score score){
+        
+        String query = "UPDATE score\n" +
+                "SET score_1=?, score_2=?, score_3=?, score_4=?, average=?\n" +
+                "WHERE id_score=?;";
+        int result = 0;
+        try (Connection conn = conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setFloat(1, score.getScore1());
+            stmt.setFloat(2, score.getScore2());
+            stmt.setFloat(3, score.getScore3());
+            stmt.setFloat(4, score.getScore4());
+            stmt.setFloat(5, score.getAverageScore());
+            stmt.setFloat(6, score.getId_score());
+            
+            result = stmt.executeUpdate();  
+                
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+        
+        return result;
     }
 }

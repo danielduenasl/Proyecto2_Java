@@ -10,6 +10,15 @@ package data;
  */
 public class Score {
     
+    private int id_score;
+
+    public int getId_score() {
+        return id_score;
+    }
+
+    public void setId_score(int id_score) {
+        this.id_score = id_score;
+    }
     private float score1;
     private float score2;
     private float score3;

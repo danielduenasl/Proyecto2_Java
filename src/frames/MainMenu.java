@@ -8,6 +8,7 @@ package frames;
 import data.Conexion;
 import data.EventMenuSelected;
 import data.Professor;
+import data.Student;
 import forms.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -35,10 +36,11 @@ public class MainMenu extends javax.swing.JFrame {
         
         conexion = Con;
         setBackground(new Color(0, 0, 0, 0));
+        Student student = null;
         MainM = new jpMainMenu();
         alumnos = new jpAlumnos(this, this.conexion);
         calif = new jpCalificaciones(this, this.conexion);
-        promed = new jpPromedio();
+        promed = new jpPromedio(conexion, student, "");
         mejorAlum = new jpMejoresAlumnos();
         
         jpMenu1.addEventMenuSelected(new EventMenuSelected() {

@@ -4,6 +4,7 @@
  */
 package forms;
 
+import data.Conexion;
 import data.Student;
 import frames.MainMenu;
 import java.awt.BorderLayout;
@@ -21,12 +22,14 @@ public class jpInfoAlumno extends javax.swing.JPanel {
 
     private MainMenu mainMenu;
     private Student stud = null;
+    private Conexion conexion = null;
     /**
      * Creates new form jpInfoAlumno
      */
-    public jpInfoAlumno(MainMenu mainM, Student student) {
+    public jpInfoAlumno(MainMenu mainM, Student student, Conexion Con) {
         initComponents();
         stud = student;
+        conexion = Con;
         
         this.mainMenu = mainM;
         txtNombre.setText(student.getName());
@@ -249,7 +252,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
         Student student = stud;
-        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu, student);
+        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu, student, conexion);
         notasAlumno.setSize(760, 606);
         notasAlumno.setLocation(0, 0);
 

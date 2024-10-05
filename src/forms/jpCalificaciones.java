@@ -261,7 +261,8 @@ public class jpCalificaciones extends javax.swing.JPanel {
     
     
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
-        jpPromedio modificarNotas = new jpPromedio();
+        Student student = null;
+        jpPromedio modificarNotas = new jpPromedio(conexion, student, "");
         modificarNotas.setSize(760, 606);
         modificarNotas.setLocation(0, 0);
 
