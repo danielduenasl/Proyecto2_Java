@@ -7,6 +7,7 @@ package forms;
 
 import data.Conexion;
 import data.Grade;
+import data.Professor;
 import data.Student;
 import frames.*;
 import java.awt.BorderLayout;
@@ -42,6 +43,8 @@ public class jpAlumnos extends javax.swing.JPanel {
         SQL = new SQLMethods(conexion);
         ConsultarDatos();
         addRows(grades.get(0).getStudents());
+        Professor newProf = grades.get(0).getProfessor();
+        txtProfessor.setText(newProf.getName() + " " + newProf.getLastName());
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
@@ -75,7 +78,7 @@ public class jpAlumnos extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jtableAlumno = new models.CustomTable();
         jLabel3 = new javax.swing.JLabel();
-        customTextField1 = new models.CustomTextField();
+        txtProfessor = new models.CustomTextField();
         jpBtnCreate = new javax.swing.JPanel();
         jlBtnCreate = new javax.swing.JLabel();
 
@@ -153,7 +156,7 @@ public class jpAlumnos extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("GRADO");
 
-        customTextField1.setEditable(false);
+        txtProfessor.setEditable(false);
 
         jpBtnCreate.setBackground(new java.awt.Color(222, 8, 163));
         jpBtnCreate.setLayout(new java.awt.BorderLayout());
@@ -190,7 +193,7 @@ public class jpAlumnos extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(txtProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(367, 367, 367)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +220,7 @@ public class jpAlumnos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cbxGrado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtProfessor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -263,6 +266,8 @@ public class jpAlumnos extends javax.swing.JPanel {
                                 estudiante.getGender(),
                             };
                          modelo.addRow(fila);
+                         Professor newProf = grades.get(i).getProfessor();
+                         txtProfessor.setText(newProf.getName() + " " + newProf.getLastName());
                     }
                 }
                i++;
@@ -291,7 +296,9 @@ public class jpAlumnos extends javax.swing.JPanel {
         int i = 0;
         Grade newGrade = null;
         while (i < 6){
+            Professor professor = SQL.SelectProfessor((i + 1));
             newGrade = new Grade();
+            newGrade.setProfessor(professor);
             List<Student> students = SQL.SelectStudents((i + 1));
             newGrade.setIdGrade((i + 1));
             newGrade.setStudents(students);
@@ -386,7 +393,6 @@ public class jpAlumnos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private models.CustomComboBox cbxGrado;
-    private models.CustomTextField customTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -399,5 +405,6 @@ public class jpAlumnos extends javax.swing.JPanel {
     private javax.swing.JPanel jpBtnInfo;
     private javax.swing.JPanel jpBtnNotas;
     private models.CustomTable jtableAlumno;
+    private models.CustomTextField txtProfessor;
     // End of variables declaration//GEN-END:variables
 }
