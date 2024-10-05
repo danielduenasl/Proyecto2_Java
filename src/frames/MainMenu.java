@@ -57,9 +57,7 @@ public class MainMenu extends javax.swing.JFrame {
                     setForm(calif);
                 } else if (index == 5){
                     setForm(promed);
-                } else if (index == 6){
-                    setForm(mejorAlum);
-                }
+                } 
               
             }
         });

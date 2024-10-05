@@ -14,9 +14,9 @@ import java.util.List;
 public class Courses {
     
     private String name;
-    private List<Score> score; 
+    private Score score; 
 
-    public Courses(String name, List<Score> score) {
+    public Courses(String name, Score score) {
         this.name = name;
         this.score = score;
     }
@@ -28,7 +28,7 @@ public class Courses {
         return name;
     }
 
-    public List<Score> getScore() {
+    public Score getScore() {
         return score;
     }
 
@@ -36,7 +36,7 @@ public class Courses {
         this.name = name;
     }
 
-    public void setScore(List<Score> score) {
+    public void setScore(Score score) {
         this.score = score;
     }
     

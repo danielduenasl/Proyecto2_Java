@@ -5,8 +5,10 @@
 package models;
 
 import data.Conexion;
+import data.Courses;
 import data.Grade;
 import data.Professor;
+import data.Score;
 import data.Student;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -176,4 +178,8 @@ public class SQLMethods {
         
         return result;
     }
+    
+//    public List<Courses> SelectScores(){
+//        Score score = null;
+//    }
 }
