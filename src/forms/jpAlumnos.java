@@ -388,7 +388,21 @@ public class jpAlumnos extends javax.swing.JPanel {
     }//GEN-LAST:event_jlBtnCreateMouseExited
 
     private void jlBtnNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnNotasMouseClicked
-        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu);
+        try{
+            int row = jtableAlumno.getSelectedRow();
+        }catch(Exception ex){
+            
+            return;
+        }
+        String gradoSel = (String) cbxGrado.getSelectedItem();
+       
+        Student student = null;
+        int row = jtableAlumno.getSelectedRow();
+        String carnet = (String) jtableAlumno.getValueAt(row, 0);
+        student = buscarEstudiantePorCarnet(carnet);
+        student.setGrade(gradoSel);
+        
+        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu, student);
         notasAlumno.setSize(760, 606);
         notasAlumno.setLocation(0, 0);
 

@@ -143,8 +143,6 @@ public class jpPromedio extends javax.swing.JPanel {
         jlBtnSearch = new javax.swing.JLabel();
         jpAprueba = new javax.swing.JPanel();
         jlAprueba = new javax.swing.JLabel();
-        jpBtnDM = new javax.swing.JPanel();
-        jlBtnDM = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -258,27 +256,6 @@ public class jpPromedio extends javax.swing.JPanel {
         jpAprueba.setLayout(new java.awt.BorderLayout());
         jpAprueba.add(jlAprueba, java.awt.BorderLayout.CENTER);
 
-        jpBtnDM.setBackground(new java.awt.Color(222, 8, 163));
-        jpBtnDM.setForeground(new java.awt.Color(255, 255, 255));
-        jpBtnDM.setLayout(new java.awt.BorderLayout());
-
-        jlBtnDM.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jlBtnDM.setForeground(new java.awt.Color(255, 255, 255));
-        jlBtnDM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlBtnDM.setText("DATOS MODIFICADOS!");
-        jlBtnDM.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlBtnDMMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jlBtnDMMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jlBtnDMMouseExited(evt);
-            }
-        });
-        jpBtnDM.add(jlBtnDM, java.awt.BorderLayout.CENTER);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -297,8 +274,7 @@ public class jpPromedio extends javax.swing.JPanel {
                                 .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jpBtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(253, 253, 253)
-                                .addComponent(jpBtnDM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jpBtnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -328,13 +304,11 @@ public class jpPromedio extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtCarnet, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                        .addComponent(jpBtnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jpBtnDM, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtCarnet, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jpBtnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -410,25 +384,6 @@ public class jpPromedio extends javax.swing.JPanel {
     }//GEN-LAST:event_txtNota1ActionPerformed
 
     DatosModif DM = null;
-    private void jlBtnDMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnDMMouseClicked
-        if (DM != null){          
-            DM.show();
-        } else {
-            DM = new DatosModif();
-            DM.show();
-        }
-          
-        jpBtnDM.setBackground(new Color (222, 8, 163));
-    }//GEN-LAST:event_jlBtnDMMouseClicked
-
-    private void jlBtnDMMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnDMMouseEntered
-        jpBtnDM.setBackground(new Color (232, 50, 22));
-    }//GEN-LAST:event_jlBtnDMMouseEntered
-
-    private void jlBtnDMMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnDMMouseExited
-        jpBtnDM.setBackground(new Color (222, 8, 163));
-    }//GEN-LAST:event_jlBtnDMMouseExited
-
     private void MostarPromedio(){
         float n1 = Float.parseFloat(txtNota1.getText());
         float n2 = Float.parseFloat(txtNota2.getText());
@@ -466,11 +421,9 @@ public class jpPromedio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlAprueba;
-    private javax.swing.JLabel jlBtnDM;
     private javax.swing.JLabel jlBtnGuardar;
     private javax.swing.JLabel jlBtnSearch;
     private javax.swing.JPanel jpAprueba;
-    private javax.swing.JPanel jpBtnDM;
     private javax.swing.JPanel jpBtnGuardar;
     private javax.swing.JPanel jpBtnSearch;
     private models.CustomTextField txtCarnet;

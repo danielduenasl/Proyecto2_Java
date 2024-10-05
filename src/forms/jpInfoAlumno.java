@@ -20,11 +20,13 @@ import javax.swing.table.DefaultTableModel;
 public class jpInfoAlumno extends javax.swing.JPanel {
 
     private MainMenu mainMenu;
+    private Student stud = null;
     /**
      * Creates new form jpInfoAlumno
      */
     public jpInfoAlumno(MainMenu mainM, Student student) {
         initComponents();
+        stud = student;
         
         this.mainMenu = mainM;
         txtNombre.setText(student.getName());
@@ -246,7 +248,8 @@ public class jpInfoAlumno extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
-        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu);
+        Student student = stud;
+        jpNotasAlumno notasAlumno = new jpNotasAlumno(mainMenu, student);
         notasAlumno.setSize(760, 606);
         notasAlumno.setLocation(0, 0);
 

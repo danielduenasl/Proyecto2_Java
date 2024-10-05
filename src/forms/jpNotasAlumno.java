@@ -4,9 +4,13 @@
  */
 package forms;
 
+import data.Courses;
+import data.Student;
 import frames.MainMenu;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,10 +22,15 @@ public class jpNotasAlumno extends javax.swing.JPanel {
     /**
      * Creates new form jpNotasAlumno
      */
-    public jpNotasAlumno(MainMenu mainM) {
+    public jpNotasAlumno(MainMenu mainM, Student student) {
         initComponents();
         
         mainMenu = mainM;
+        
+        txtNombre.setText(student.getName());
+        txtApellido.setText(student.getLastName());
+        addRows(student.getCourse());
+        
     }
 
     /**
@@ -36,13 +45,13 @@ public class jpNotasAlumno extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        customTable1 = new models.CustomTable();
+        jtNotas = new models.CustomTable();
         jpBtnInfo = new javax.swing.JPanel();
         jlBtnInfo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        customTextField1 = new models.CustomTextField();
+        txtNombre = new models.CustomTextField();
         jLabel3 = new javax.swing.JLabel();
-        customTextField2 = new models.CustomTextField();
+        txtApellido = new models.CustomTextField();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -52,7 +61,7 @@ public class jpNotasAlumno extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("NOTAS DEL ALUMNO");
 
-        customTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -63,7 +72,7 @@ public class jpNotasAlumno extends javax.swing.JPanel {
                 "Materia", "Nota 1", "Nota 2", "Nota 3", "Nota 4", "Promedio"
             }
         ));
-        jScrollPane1.setViewportView(customTable1);
+        jScrollPane1.setViewportView(jtNotas);
 
         jpBtnInfo.setBackground(new java.awt.Color(222, 8, 163));
         jpBtnInfo.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,13 +99,13 @@ public class jpNotasAlumno extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("NOMBRE");
 
-        customTextField1.setEditable(false);
+        txtNombre.setEditable(false);
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("APELLIDO");
 
-        customTextField2.setEditable(false);
+        txtApellido.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,12 +126,12 @@ public class jpNotasAlumno extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                            .addComponent(customTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,11 +144,11 @@ public class jpNotasAlumno extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
@@ -150,6 +159,23 @@ public class jpNotasAlumno extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addRows(List<Courses> courses) {
+        DefaultTableModel modelo = (DefaultTableModel) jtNotas.getModel();
+        modelo.setRowCount(0);
+        for (Courses course : courses) {
+            Object[] fila = {
+                course.getName(),
+                course.getScore().getScore1(),
+                course.getScore().getScore2(),
+                course.getScore().getScore3(),
+                course.getScore().getScore4(),
+                course.getScore().getAverageScore(),
+            };
+            modelo.addRow(fila);
+        }
+        jtNotas.setModel(modelo);
+    }
+    
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
         jpPromedio modificarNotas = new jpPromedio();
         modificarNotas.setSize(760, 606);
@@ -179,9 +205,6 @@ public class jpNotasAlumno extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private models.CustomTable customTable1;
-    private models.CustomTextField customTextField1;
-    private models.CustomTextField customTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -189,5 +212,8 @@ public class jpNotasAlumno extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlBtnInfo;
     private javax.swing.JPanel jpBtnInfo;
+    private models.CustomTable jtNotas;
+    private models.CustomTextField txtApellido;
+    private models.CustomTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

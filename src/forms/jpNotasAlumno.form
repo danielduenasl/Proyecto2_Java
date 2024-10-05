@@ -50,13 +50,13 @@
                       <Component id="jLabel1" min="-2" pref="567" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="customTextField1" pref="0" max="32767" attributes="0"/>
+                              <Component id="txtNombre" pref="0" max="32767" attributes="0"/>
                               <Component id="jLabel2" pref="169" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel3" pref="175" max="32767" attributes="0"/>
-                              <Component id="customTextField2" pref="0" max="32767" attributes="0"/>
+                              <Component id="txtApellido" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -74,12 +74,12 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel2" min="-2" pref="25" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="customTextField1" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="txtNombre" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel3" min="-2" pref="25" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="customTextField2" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="txtApellido" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -110,7 +110,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="models.CustomTable" name="customTable1">
+            <Component class="models.CustomTable" name="jtNotas">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="6" rowCount="4">
@@ -173,7 +173,7 @@
             <Property name="text" type="java.lang.String" value="NOMBRE"/>
           </Properties>
         </Component>
-        <Component class="models.CustomTextField" name="customTextField1">
+        <Component class="models.CustomTextField" name="txtNombre">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
@@ -189,7 +189,7 @@
             <Property name="text" type="java.lang.String" value="APELLIDO"/>
           </Properties>
         </Component>
-        <Component class="models.CustomTextField" name="customTextField2">
+        <Component class="models.CustomTextField" name="txtApellido">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
