@@ -38,4 +38,8 @@ public class CustomTextField extends JTextField {
     @Override
     protected void paintBorder(Graphics g) {
     }
+
+    public void getText(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

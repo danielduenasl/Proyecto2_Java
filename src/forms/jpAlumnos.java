@@ -307,6 +307,18 @@ public class jpAlumnos extends javax.swing.JPanel {
         }
     }
     
+    public Student buscarEstudiantePorCarnet(String carnetBuscado) {
+
+        for (Grade grade : grades) {
+            for (Student student : grade.getStudents()) {
+                if (student.getCarnet().equals(carnetBuscado)) {
+                    return student;
+                }
+            }
+        }
+        return null;
+    }
+    
     private void jlBtnInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseEntered
         jpBtnInfo.setBackground(new Color (232, 50, 22));
     }//GEN-LAST:event_jlBtnInfoMouseEntered
@@ -316,7 +328,17 @@ public class jpAlumnos extends javax.swing.JPanel {
     }//GEN-LAST:event_jlBtnInfoMouseExited
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
-        Student student = new Student();
+        try{
+            int row = jtableAlumno.getSelectedRow();
+        }catch(Exception ex){
+            
+            return;
+        }
+       
+        Student student = null;
+        int row = jtableAlumno.getSelectedRow();
+        String carnet = (String) jtableAlumno.getValueAt(row, 0);
+        student = buscarEstudiantePorCarnet(carnet);
         
         jpInfoAlumno infoAlumno = new jpInfoAlumno(mainMenu, student);
         infoAlumno.setSize(760, 606);

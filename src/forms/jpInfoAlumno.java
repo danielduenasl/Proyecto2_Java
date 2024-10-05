@@ -8,6 +8,7 @@ import data.Student;
 import frames.MainMenu;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,11 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         initComponents();
         
         this.mainMenu = mainM;
+        txtNombre.setText(student.getName());
+        txtApellido.setText(student.getLastName());
+        txtEdad.setText(String.valueOf(student.getAge()));
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+        txtDateB.setText(formatoFecha.format(student.getDateOfBirth()));
         
         Genero();
         cbxGenero.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +59,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtEdad = new models.CustomTextField();
         jLabel4 = new javax.swing.JLabel();
-        customDateField1 = new models.CustomDateField();
+        txtDateB = new models.CustomDateField();
         jLabel6 = new javax.swing.JLabel();
         cbxGenero = new models.CustomComboBox();
         jLabel7 = new javax.swing.JLabel();
@@ -63,7 +69,6 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         jlGenero = new javax.swing.JLabel();
         jpBtnInfo = new javax.swing.JPanel();
         jlBtnInfo = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -149,9 +154,6 @@ public class jpInfoAlumno extends javax.swing.JPanel {
         });
         jpBtnInfo.add(jlBtnInfo, java.awt.BorderLayout.CENTER);
 
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow-back (1).png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,14 +162,12 @@ public class jpInfoAlumno extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jpBtnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(customDateField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDateB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -188,9 +188,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -216,7 +214,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customDateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDateB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +286,6 @@ public class jpInfoAlumno extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private models.CustomComboBox cbxGenero;
     private models.CustomComboBox customComboBox2;
-    private models.CustomDateField customDateField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -296,7 +293,6 @@ public class jpInfoAlumno extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -304,6 +300,7 @@ public class jpInfoAlumno extends javax.swing.JPanel {
     private javax.swing.JLabel jlGenero;
     private javax.swing.JPanel jpBtnInfo;
     private models.CustomTextField txtApellido;
+    private models.CustomDateField txtDateB;
     private models.CustomTextField txtEdad;
     private models.CustomTextField txtNombre;
     // End of variables declaration//GEN-END:variables
