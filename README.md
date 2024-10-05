@@ -84,8 +84,6 @@ Tambien se agrego la opción: "*Crear alumno*", al darle click se nos mostrara u
 
 En la opción de promedio vamos a poder calcular las 4 notas bimestrales deseadas
 * Opcion 1 se seleciona la opcion promedio
-* Opcion 2 se puede buscar al alumno al ingresar el carnet.
-* Al ingresar el carnet del alumno se nos mostrara las 4 notas del alumno y se mostrara si el alumno aprobo el grado o no. }
 * Hay una opcion para modificar datos, en este caso puede ser por cualquier revision de examen o calificacion de tareas, al cambiar las notas se puede seleccionar la opcion 4 para guardar los datos, y estos se modificaran en la base de datos. 
 
 [![Main-Menu.png](https://i.postimg.cc/7Y5kYHKY/Main-Menu.png)](https://postimg.cc/WhcK5vRQ)
