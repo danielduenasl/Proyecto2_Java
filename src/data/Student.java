@@ -13,6 +13,15 @@ import java.util.List;
  */
 public class Student extends Person {
     
+    private int idStudent;
+
+    public int getIdStudent() {
+        return idStudent;
+    }
+
+    public void setIdStudent(int idStudent) {
+        this.idStudent = idStudent;
+    }
     private String carnet;
     private String grade;
     private List <Courses> course;

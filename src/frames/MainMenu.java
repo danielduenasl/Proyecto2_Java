@@ -5,11 +5,16 @@
 package frames;
 
 
+import data.Conexion;
 import data.EventMenuSelected;
+import data.Professor;
 import forms.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JComponent;
+import models.SQLMethods;
+import models.course;
 
 /**
  *
@@ -17,7 +22,7 @@ import javax.swing.JComponent;
  */
 public class MainMenu extends javax.swing.JFrame {
 
-    
+    static Conexion conexion = null;
     private jpMainMenu MainM;
     private jpAlumnos alumnos;
     private jpCalificaciones calif;
@@ -27,12 +32,16 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
-    public MainMenu() {
+    public MainMenu(Conexion Con) {
         initComponents();
         
+        SQLMethods SQL = new SQLMethods(Con);
+        Professor prof = SQL.SelectProfessor(2);
+        
+        conexion = Con;
         setBackground(new Color(0, 0, 0, 0));
         MainM = new jpMainMenu();
-        alumnos = new jpAlumnos(this);
+        alumnos = new jpAlumnos(this, conexion);
         calif = new jpCalificaciones(this);
         promed = new jpPromedio();
         mejorAlum = new jpMejoresAlumnos();
@@ -346,7 +355,7 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                new MainMenu(conexion).setVisible(true);
             }
         });
     }

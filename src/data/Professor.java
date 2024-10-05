@@ -12,6 +12,15 @@ import java.util.Date;
  */
 public class Professor extends Person {
     
+    private int idProfessor;
+
+    public int getIdProfessor() {
+        return idProfessor;
+    }
+
+    public void setIdProfessor(int idProfessor) {
+        this.idProfessor = idProfessor;
+    }
     private String carnet;
     private String course;
     private int grade;

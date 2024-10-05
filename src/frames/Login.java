@@ -4,6 +4,7 @@
  */
 package frames;
 
+import data.Conexion;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -371,7 +372,11 @@ public class Login extends javax.swing.JFrame {
          try {
             Connection conn = this.getConnection();
             System.out.println("Conexion exitosa a MariaDB");
-            MainMenu MM = new MainMenu();
+            Conexion con = new Conexion();
+            con.setURL(URL);
+            con.setUSER(USER);
+            con.setPASS(PASSWORD);
+            MainMenu MM = new MainMenu(con);
             MM.show();
             this.setVisible(false);
         } catch (SQLException e) {

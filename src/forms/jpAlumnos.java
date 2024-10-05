@@ -5,11 +5,19 @@
 package forms;
 
 
+import data.Conexion;
+import data.Grade;
 import data.Student;
 import frames.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import models.SQLMethods;
 
 /**
  *
@@ -17,16 +25,33 @@ import java.awt.Font;
  */
 public class jpAlumnos extends javax.swing.JPanel {
 
-    private MainMenu mainMenu;   
+    private MainMenu mainMenu;  
+    private Conexion conexion;
+    private List<Grade> grades = null;
+    private SQLMethods SQL = null;
     
     /**
      * Creates new form jpAlumnos
      */
-    public jpAlumnos(MainMenu mainM) {
+    public jpAlumnos(MainMenu mainM, Conexion Con) {
         initComponents();
-        
         this.mainMenu = mainM;
-  
+        this.conexion = Con;     
+        
+        grades = new ArrayList();
+        SQL = new SQLMethods(conexion);
+        ConsultarDatos();
+        addRows(grades.get(0).getStudents());
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        jtableAlumno.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        
+        cbxGrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxGradoActionPerformed(evt);
+            }   
+        });
     }
     
 
@@ -46,9 +71,9 @@ public class jpAlumnos extends javax.swing.JPanel {
         jlBtnInfo = new javax.swing.JLabel();
         jpBtnNotas = new javax.swing.JPanel();
         jlBtnNotas = new javax.swing.JLabel();
-        customComboBox1 = new models.CustomComboBox();
+        cbxGrado = new models.CustomComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        customTable1 = new models.CustomTable();
+        jtableAlumno = new models.CustomTable();
         jLabel3 = new javax.swing.JLabel();
         customTextField1 = new models.CustomTextField();
         jpBtnCreate = new javax.swing.JPanel();
@@ -108,9 +133,9 @@ public class jpAlumnos extends javax.swing.JPanel {
         });
         jpBtnNotas.add(jlBtnNotas, java.awt.BorderLayout.CENTER);
 
-        customComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
+        cbxGrado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
 
-        customTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtableAlumno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -118,10 +143,10 @@ public class jpAlumnos extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "No.", "Nombre", "Apellido", "Carnet"
+                "Carnet", "Nombre", "Apellido", "Genero"
             }
         ));
-        jScrollPane2.setViewportView(customTable1);
+        jScrollPane2.setViewportView(jtableAlumno);
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -169,7 +194,7 @@ public class jpAlumnos extends javax.swing.JPanel {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(367, 367, 367)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbxGrado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -191,7 +216,7 @@ public class jpAlumnos extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(customComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxGrado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(customTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
@@ -206,6 +231,75 @@ public class jpAlumnos extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbxGradoActionPerformed(java.awt.event.ActionEvent evt) {
+        String gradoSeleccionado = (String) cbxGrado.getSelectedItem();
+            
+        DefaultTableModel modelo = (DefaultTableModel) jtableAlumno.getModel();
+ 
+        modelo.setRowCount(0);
+        int i = 0;
+        int SelectGrade = 0;
+        if (gradoSeleccionado.equals("Primero")){
+            SelectGrade = 1;
+        } else if (gradoSeleccionado.equals("Segundo")) {
+            SelectGrade = 2;
+        } else if (gradoSeleccionado.equals("Tercero")) {
+            SelectGrade = 3;
+        } else if (gradoSeleccionado.equals("Cuarto")) {
+            SelectGrade = 4;
+        } else if (gradoSeleccionado.equals("Quinto")) {
+            SelectGrade = 5;
+        } else if (gradoSeleccionado.equals("Sexto")) {
+            SelectGrade = 6;
+        }
+        
+        while (i < 6) {
+               if (grades.get(i).getIdGrade() == SelectGrade) {
+                    for (Student estudiante : grades.get(i).getStudents()) {
+                            Object[] fila = {
+                                estudiante.getCarnet(),
+                                estudiante.getName(),
+                                estudiante.getLastName(),
+                                estudiante.getGender(),
+                            };
+                         modelo.addRow(fila);
+                    }
+                }
+               i++;
+            }
+        
+        }
+
+    
+    private void addRows(List<Student> students) {
+        DefaultTableModel modelo = (DefaultTableModel) jtableAlumno.getModel();
+        modelo.setRowCount(0);
+        for (Student student : students) {
+            Object[] fila = {
+                student.getCarnet(),
+                student.getName(),
+                student.getLastName(),
+                student.getGender()
+            };
+            modelo.addRow(fila);
+        }
+        jtableAlumno.setModel(modelo);
+    }
+
+    
+    public void ConsultarDatos(){    
+        int i = 0;
+        Grade newGrade = null;
+        while (i < 6){
+            newGrade = new Grade();
+            List<Student> students = SQL.SelectStudents((i + 1));
+            newGrade.setIdGrade((i + 1));
+            newGrade.setStudents(students);
+            grades.add(newGrade);
+            i++;
+        }
+    }
+    
     private void jlBtnInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseEntered
         jpBtnInfo.setBackground(new Color (232, 50, 22));
     }//GEN-LAST:event_jlBtnInfoMouseEntered
@@ -291,8 +385,7 @@ public class jpAlumnos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private models.CustomComboBox customComboBox1;
-    private models.CustomTable customTable1;
+    private models.CustomComboBox cbxGrado;
     private models.CustomTextField customTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -305,5 +398,6 @@ public class jpAlumnos extends javax.swing.JPanel {
     private javax.swing.JPanel jpBtnCreate;
     private javax.swing.JPanel jpBtnInfo;
     private javax.swing.JPanel jpBtnNotas;
+    private models.CustomTable jtableAlumno;
     // End of variables declaration//GEN-END:variables
 }
