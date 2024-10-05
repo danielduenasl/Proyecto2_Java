@@ -417,9 +417,15 @@ public class jpPromedio extends javax.swing.JPanel {
         
     }//GEN-LAST:event_txtNota1ActionPerformed
 
+    DatosModif DM = null;
     private void jlBtnDMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnDMMouseClicked
-        DatosModif DM = new DatosModif();
-        DM.show();
+        if (DM != null){          
+            DM.show();
+        } else {
+            DM = new DatosModif();
+            DM.show();
+        }
+          
         jpBtnDM.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnDMMouseClicked
 
