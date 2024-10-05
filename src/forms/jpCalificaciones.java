@@ -4,9 +4,21 @@
  */
 package forms;
 
+import data.Conexion;
+import data.Courses;
+import data.Grade;
+import data.Professor;
+import data.Score;
+import data.Student;
 import frames.MainMenu;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import models.SQLMethods;
 
 /**
  *
@@ -15,13 +27,31 @@ import java.awt.Color;
 public class jpCalificaciones extends javax.swing.JPanel {
 
     private MainMenu mainMenu; 
+    private Conexion conexion;
+    private List<Grade> grades = null;
+    private SQLMethods SQL = null;
     /**
      * Creates new form jpCalificaciones
      */
-    public jpCalificaciones(MainMenu mainM) {
+    public jpCalificaciones(MainMenu mainM, Conexion Con) {
         initComponents();
         
+        conexion = Con;
         mainMenu = mainM;
+        grades = new ArrayList();
+        SQL = new SQLMethods(conexion);
+        ConsultarDatos();
+        addRows(grades.get(0).getStudents());
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        tableCalif.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        
+        cbxGrade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxGradoActionPerformed(evt);
+            }   
+        });
     }
 
     /**
@@ -37,9 +67,9 @@ public class jpCalificaciones extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        customComboBox1 = new models.CustomComboBox();
+        cbxGrade = new models.CustomComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        customTable2 = new models.CustomTable();
+        tableCalif = new models.CustomTable();
         customComboBox2 = new models.CustomComboBox();
         jpBtnInfo = new javax.swing.JPanel();
         jlBtnInfo = new javax.swing.JLabel();
@@ -63,9 +93,9 @@ public class jpCalificaciones extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("GRADO");
 
-        customComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
+        cbxGrade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
 
-        customTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableCalif.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -73,11 +103,13 @@ public class jpCalificaciones extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "No.", "Nombre", "Nota 1", "Nota 2", "Nota 3", "Nota 4"
+                "Carnet", "Nombre", "Nota 1", "Nota 2", "Nota 3", "Nota 4"
             }
         ));
-        customTable2.setSelectionBackground(new java.awt.Color(255, 0, 51));
-        jScrollPane2.setViewportView(customTable2);
+        tableCalif.setSelectionBackground(new java.awt.Color(255, 0, 51));
+        jScrollPane2.setViewportView(tableCalif);
+
+        customComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lenguaje", "Matematicas", "Sociales", "Naturales", "Artes", "Fisica" }));
 
         jpBtnInfo.setBackground(new java.awt.Color(222, 8, 163));
         jpBtnInfo.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,7 +149,7 @@ public class jpCalificaciones extends javax.swing.JPanel {
                             .addComponent(customComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                            .addComponent(cbxGrade, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(519, 519, 519)
@@ -135,7 +167,7 @@ public class jpCalificaciones extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -150,6 +182,84 @@ public class jpCalificaciones extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void cbxGradoActionPerformed(java.awt.event.ActionEvent evt) {
+        String gradoSeleccionado = (String) cbxGrade.getSelectedItem();
+            
+        DefaultTableModel modelo = (DefaultTableModel) tableCalif.getModel();
+ 
+        modelo.setRowCount(0);
+        int i = 0;
+        int SelectGrade = 0;
+        if (gradoSeleccionado.equals("Primero")){
+            SelectGrade = 1;
+        } else if (gradoSeleccionado.equals("Segundo")) {
+            SelectGrade = 2;
+        } else if (gradoSeleccionado.equals("Tercero")) {
+            SelectGrade = 3;
+        } else if (gradoSeleccionado.equals("Cuarto")) {
+            SelectGrade = 4;
+        } else if (gradoSeleccionado.equals("Quinto")) {
+            SelectGrade = 5;
+        } else if (gradoSeleccionado.equals("Sexto")) {
+            SelectGrade = 6;
+        }
+        
+        while (i < 6) {
+            if (grades.get(i).getIdGrade() == SelectGrade) {
+                 for (Student estudiante : grades.get(i).getStudents()) {
+                         Object[] fila = {
+                             estudiante.getCarnet(),
+                             estudiante.getName(),
+                         };
+                      modelo.addRow(fila);
+                 }
+             }
+            i++;
+        }
+        
+    }
+    
+    private void addRows(List<Student> students) {
+        DefaultTableModel modelo = (DefaultTableModel) tableCalif.getModel();
+        modelo.setRowCount(0);
+        for (Student student : students) {
+            List<Courses> courses = student.getCourse();
+            int a = 0;
+
+            while (a < courses.size() && a < 6) {
+                Score score = courses.get(a).getScore();
+                Object[] fila = {
+                    student.getCarnet(),
+                    student.getName(),
+                    score.getScore1(),
+                    score.getScore2(),
+                    score.getScore3(),
+                    score.getScore4(),
+                };
+                modelo.addRow(fila);
+                a++;
+            }
+        }
+        tableCalif.setModel(modelo);
+    }
+    
+    public void ConsultarDatos(){    
+        int i = 0;
+        Grade newGrade = null;
+        while (i < 6){
+            Professor professor = SQL.SelectProfessor((i + 1));
+            newGrade = new Grade();
+            newGrade.setProfessor(professor);
+            List<Student> students = SQL.SelectStudents((i + 1));
+            newGrade.setIdGrade((i + 1));
+            newGrade.setStudents(students);
+            grades.add(newGrade);
+            i++;
+        }
+    }
+    
+    
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
         jpPromedio modificarNotas = new jpPromedio();
         modificarNotas.setSize(760, 606);
@@ -179,9 +289,8 @@ public class jpCalificaciones extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private models.CustomComboBox customComboBox1;
+    private models.CustomComboBox cbxGrade;
     private models.CustomComboBox customComboBox2;
-    private models.CustomTable customTable2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -189,5 +298,6 @@ public class jpCalificaciones extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jlBtnInfo;
     private javax.swing.JPanel jpBtnInfo;
+    private models.CustomTable tableCalif;
     // End of variables declaration//GEN-END:variables
 }

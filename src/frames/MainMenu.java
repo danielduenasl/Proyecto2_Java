@@ -13,8 +13,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JComponent;
-import models.SQLMethods;
-import models.course;
 
 /**
  *
@@ -35,14 +33,11 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu(Conexion Con) {
         initComponents();
         
-        SQLMethods SQL = new SQLMethods(Con);
-        Professor prof = SQL.SelectProfessor(2);
-        
         conexion = Con;
         setBackground(new Color(0, 0, 0, 0));
         MainM = new jpMainMenu();
-        alumnos = new jpAlumnos(this, conexion);
-        calif = new jpCalificaciones(this);
+        alumnos = new jpAlumnos(this, this.conexion);
+        calif = new jpCalificaciones(this, this.conexion);
         promed = new jpPromedio();
         mejorAlum = new jpMejoresAlumnos();
         

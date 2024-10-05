@@ -109,6 +109,7 @@ public class SQLMethods {
     public List<Student> SelectStudents(int id_grade){
         List<Student> students = new ArrayList();
         Student newStudent = null;
+        List<course> courss = SelectCourses();
         
         String query = "SELECT id_Student, grade, carnet, name, last_name, age, gender, date_Of_Birth, id_grade FROM student where id_grade = ?";
         
@@ -126,6 +127,7 @@ public class SQLMethods {
                 newStudent.setDateOfBirth(rs.getDate("date_Of_Birth"));
                 newStudent.setIdStudent(rs.getInt("id_Student"));
                 newStudent.setAge(rs.getInt("age"));
+                newStudent.setCourse(SelectScores(newStudent.getIdStudent(), courss));
                 
                 students.add(newStudent);
             }
@@ -179,7 +181,45 @@ public class SQLMethods {
         return result;
     }
     
-//    public List<Courses> SelectScores(){
-//        Score score = null;
-//    }
+    public List<Courses> SelectScores(int id_student, List<course> course){
+        List<Courses> courses = new ArrayList();
+        List<course> LCourse = course;
+
+        String query = "SELECT score_1, score_2, score_3, score_4, average, id_course " +
+                       "FROM dbschool.score WHERE id_student = ?";
+
+        try (Connection conn = conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setInt(1, id_student);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Courses newCourse = new Courses();
+                Score score = new Score();
+
+                score.setScore1(rs.getFloat("score_1"));
+                score.setScore2(rs.getFloat("score_2"));
+                score.setScore3(rs.getFloat("score_3"));
+                score.setScore4(rs.getFloat("score_4"));
+                score.setAverageScore(rs.getFloat("average"));
+
+                int id_course = rs.getInt("id_course");
+
+                for (course cour : LCourse) {
+                    if (cour.getId_course() == id_course) {
+                        newCourse.setName(cour.getCourse_name());
+                        break;
+                    }
+                }
+                newCourse.setScore(score);
+                courses.add(newCourse);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return courses;
+    }
 }
