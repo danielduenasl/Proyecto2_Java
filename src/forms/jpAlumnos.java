@@ -337,7 +337,7 @@ public class jpAlumnos extends javax.swing.JPanel {
     }//GEN-LAST:event_jlBtnInfoMouseClicked
 
     private void jlBtnCreateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnCreateMouseClicked
-        jpCrearAlumno crearAlumno = new jpCrearAlumno();
+        jpCrearAlumno crearAlumno = new jpCrearAlumno(conexion);
         crearAlumno.setSize(760, 606);
         crearAlumno.setLocation(0, 0);
 

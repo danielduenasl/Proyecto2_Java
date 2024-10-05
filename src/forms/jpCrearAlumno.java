@@ -4,7 +4,10 @@
  */
 package forms;
 
+import data.Conexion;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import models.SQLMethods;
 
 /**
  *
@@ -12,11 +15,16 @@ import java.awt.Color;
  */
 public class jpCrearAlumno extends javax.swing.JPanel {
 
+    private Conexion conexion = null;
+    private SQLMethods SQL = null;
     /**
      * Creates new form jpCrearAlumno
      */
-    public jpCrearAlumno() {
+    public jpCrearAlumno(Conexion Con) {
         initComponents();
+        
+        conexion = Con;
+        SQL = new SQLMethods(conexion);
     }
 
     /**
@@ -36,12 +44,12 @@ public class jpCrearAlumno extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtEdad = new models.CustomTextField();
-        customDateField1 = new models.CustomDateField();
+        txtDateB = new models.CustomDateField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        customComboBox1 = new models.CustomComboBox();
+        cbxGender = new models.CustomComboBox();
         jLabel7 = new javax.swing.JLabel();
-        customComboBox2 = new models.CustomComboBox();
+        cbxGrade = new models.CustomComboBox();
         jpBtnInfo = new javax.swing.JPanel();
         jlBtnInfo = new javax.swing.JLabel();
 
@@ -74,14 +82,14 @@ public class jpCrearAlumno extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("GENERO");
 
-        customComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
+        cbxGender.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("GRADO");
 
-        customComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
+        cbxGrade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto" }));
 
         jpBtnInfo.setBackground(new java.awt.Color(222, 8, 163));
         jpBtnInfo.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,12 +134,12 @@ public class jpCrearAlumno extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(customDateField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDateB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbxGender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(customComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(cbxGrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(20, 20, 20))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,14 +154,14 @@ public class jpCrearAlumno extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customDateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDateB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(customComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxGender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
@@ -165,7 +173,7 @@ public class jpCrearAlumno extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jpBtnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
@@ -175,7 +183,33 @@ public class jpCrearAlumno extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jlBtnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlBtnInfoMouseClicked
-
+        String gradoSeleccionado = (String) cbxGrade.getSelectedItem();
+        int SelectGrade = 0;
+        if (gradoSeleccionado.equals("Primero")){
+            SelectGrade = 1;
+        } else if (gradoSeleccionado.equals("Segundo")) {
+            SelectGrade = 2;
+        } else if (gradoSeleccionado.equals("Tercero")) {
+            SelectGrade = 3;
+        } else if (gradoSeleccionado.equals("Cuarto")) {
+            SelectGrade = 4;
+        } else if (gradoSeleccionado.equals("Quinto")) {
+            SelectGrade = 5;
+        } else if (gradoSeleccionado.equals("Sexto")) {
+            SelectGrade = 6;
+        }
+        String gender = (String) cbxGender.getSelectedItem();
+        int result = SQL.CrearStudent(txtNombre.getText(), txtApellido.getText(), 
+            Integer.parseInt(txtEdad.getText()), gender, gradoSeleccionado, SelectGrade, txtDateB.getText());
+        
+        if (result > 0){
+            txtNombre.setText("");
+            txtApellido.setText("");
+            txtEdad.setText("");
+            txtDateB.setText("");
+            JOptionPane.showMessageDialog(null, "Se creó exitosamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
         jpBtnInfo.setBackground(new Color (222, 8, 163));
     }//GEN-LAST:event_jlBtnInfoMouseClicked
 
@@ -189,9 +223,8 @@ public class jpCrearAlumno extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private models.CustomComboBox customComboBox1;
-    private models.CustomComboBox customComboBox2;
-    private models.CustomDateField customDateField1;
+    private models.CustomComboBox cbxGender;
+    private models.CustomComboBox cbxGrade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -203,6 +236,7 @@ public class jpCrearAlumno extends javax.swing.JPanel {
     private javax.swing.JLabel jlBtnInfo;
     private javax.swing.JPanel jpBtnInfo;
     private models.CustomTextField txtApellido;
+    private models.CustomDateField txtDateB;
     private models.CustomTextField txtEdad;
     private models.CustomTextField txtNombre;
     // End of variables declaration//GEN-END:variables

@@ -134,4 +134,46 @@ public class SQLMethods {
         
         return students;
     }
+    
+    public int CrearStudent(String name, String lastName, int Age, String gender, String grade, int IGrad, String dateb){
+        
+        String carnet = "";
+        String query2 = "SELECT carnet FROM student ORDER BY id_student DESC LIMIT 1";      
+        try (Connection conn = conexion.getConnection();
+             PreparedStatement stmt2 = conn.prepareStatement(query2)) {
+
+            ResultSet rs = stmt2.executeQuery();  
+            if (rs.next()) {
+                carnet = rs.getString("carnet");
+            }      
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }      
+        carnet = carnet.substring(1,carnet.length());
+        int Icarnet = Integer.parseInt(carnet);
+        Icarnet++;
+        carnet = "S" + String.valueOf(Icarnet);
+        
+        int result = 0;
+        String query = "INSERT INTO student (carnet, grade, name, last_name, age, gender, date_Of_Birth, id_grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        try (Connection conn = conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, carnet);
+            stmt.setString(2, grade);
+            stmt.setString(3, name);
+            stmt.setString(4, lastName);
+            stmt.setInt(5, Age);
+            stmt.setString(6, gender);
+            stmt.setString(7, dateb);
+            stmt.setInt(8, IGrad);
+            
+            result = stmt.executeUpdate();  
+                
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+        
+        return result;
+    }
 }

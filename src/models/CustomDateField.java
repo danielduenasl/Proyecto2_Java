@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class CustomDateField extends JFormattedTextField {
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     public CustomDateField() {
         initUI();
